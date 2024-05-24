@@ -21,7 +21,7 @@ class ApiManager {
 
             val newRequest = oldRequest.newBuilder()
 
-            newRequest.addHeader("Authorization", API_KEY)
+            newRequest.addHeader("api_Key", API_KEY)
 
             it.proceed(newRequest.build())
         }.build()
