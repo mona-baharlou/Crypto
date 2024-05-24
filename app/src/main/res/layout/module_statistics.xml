@@ -29,7 +29,7 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <TextView
-            android:id="@+id/txt_s_1"
+            android:id="@+id/tvOpenAmount"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,11 +46,11 @@
             android:layout_marginTop="4dp"
             android:text="Open"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_1" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOpenAmount" />
 
 
         <TextView
-            android:id="@+id/txt_s_3"
+            android:id="@+id/tvTodayHigh"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,11 +68,11 @@
             android:layout_marginTop="4dp"
             android:text="Today's High"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_3" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTodayHigh" />
 
 
         <TextView
-            android:id="@+id/txt_s_5"
+            android:id="@+id/tvTodayLow"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,10 +90,10 @@
             android:layout_marginTop="4dp"
             android:text="Today's low"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_5" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTodayLow" />
 
         <TextView
-            android:id="@+id/txt_s_7"
+            android:id="@+id/tvTodayChange"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,11 +111,11 @@
             android:layout_marginTop="4dp"
             android:text="Change Today's"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_7" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTodayChange" />
 
 
         <TextView
-            android:id="@+id/txt_s_9"
+            android:id="@+id/tvVolume"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,11 +131,11 @@
             android:layout_marginTop="4dp"
             android:text="Volume"
             app:layout_constraintStart_toStartOf="@+id/guideline_statistics"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_9" />
+            app:layout_constraintTop_toBottomOf="@+id/tvVolume" />
 
 
         <TextView
-            android:id="@+id/txt_s_11"
+            android:id="@+id/tvAverageVolume"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,10 +152,10 @@
             android:layout_marginTop="4dp"
             android:text="Average Volume"
             app:layout_constraintStart_toStartOf="@+id/guideline_statistics"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_11" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAverageVolume" />
 
         <TextView
-            android:id="@+id/txt_s_13"
+            android:id="@+id/tvMarketCap"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,10 +172,10 @@
             android:layout_marginTop="4dp"
             android:text="Market Cap"
             app:layout_constraintStart_toStartOf="@+id/guideline_statistics"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_13" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMarketCap" />
 
         <TextView
-            android:id="@+id/txt_s_15"
+            android:id="@+id/tvSupply"
             style="@style/CoinBitText.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,6 +193,6 @@
             android:layout_marginTop="4dp"
             android:text="Supply"
             app:layout_constraintStart_toStartOf="@+id/guideline_statistics"
-            app:layout_constraintTop_toBottomOf="@+id/txt_s_15" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSupply" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
