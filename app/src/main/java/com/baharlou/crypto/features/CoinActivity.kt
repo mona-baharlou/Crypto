@@ -1,4 +1,4 @@
-package com.baharlou.crypto
+package com.baharlou.crypto.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import com.baharlou.crypto.databinding.ActivityCoinBinding
 
 class CoinActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityCoinBinding
+    private lateinit var binding: ActivityCoinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

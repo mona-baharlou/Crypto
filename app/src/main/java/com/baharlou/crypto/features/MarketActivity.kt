@@ -1,4 +1,4 @@
-package com.baharlou.crypto
+package com.baharlou.crypto.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
