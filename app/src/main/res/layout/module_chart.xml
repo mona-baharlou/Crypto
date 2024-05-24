@@ -63,4 +63,9 @@
         app:spark_animateChanges="true"
         app:spark_lineColor="@color/colorPrimary"
         app:spark_scrubEnabled="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Some Error Occured !" />
 </androidx.constraintlayout.widget.ConstraintLayout>
