@@ -44,15 +44,21 @@ class ApiManager {
 
     }
 
-    fun getNews() {
+    fun getNews(apiCallback: ApiCallback<ArrayList<Pair<String, String>>>) {
         apiService.getTopNews().enqueue(object : Callback<NewsData> {
             override fun onResponse(call: Call<NewsData>, response: Response<NewsData>) {
                 val data = response.body()!!
-                val title = data.data.fil
+
+                val dataToSend: ArrayList<Pair<String, String>> = arrayListOf()
+                data.data.forEach {
+                    dataToSend.add(Pair(it.title, it.url))
+                }
+                apiCallback.onSuccess(dataToSend)
 
             }
 
-            override fun onFailure(p0: Call<NewsData>, p1: Throwable) {
+            override fun onFailure(call: Call<NewsData>, t: Throwable) {
+                apiCallback.onError(t.message!!)
             }
 
         })
