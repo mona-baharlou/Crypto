@@ -54,6 +54,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
 
     implementation ("com.robinhood.spark:spark:1.2.0")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
 
 
 }
