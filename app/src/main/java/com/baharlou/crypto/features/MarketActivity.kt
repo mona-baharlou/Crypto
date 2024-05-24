@@ -11,7 +11,7 @@ import com.baharlou.crypto.databinding.ActivityMarketBinding
 class MarketActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMarketBinding
-    lateinit var apiManager: ApiManager
+    var apiManager = ApiManager()
     lateinit var newsData: ArrayList<Pair<String, String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +19,8 @@ class MarketActivity : AppCompatActivity() {
 
         binding = ActivityMarketBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         initUI()
 
@@ -38,20 +40,28 @@ class MarketActivity : AppCompatActivity() {
 
     private fun getNews() {
 
-        apiManager.getNews(object : ApiManager.ApiCallback<ArrayList<Pair<String, String>>> {
-            override fun onSuccess(data: ArrayList<Pair<String, String>>) {
-
-                newsData = data
-                refreshNews()
-            }
-
-            override fun onError(errorMessage: String) {
-                Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
-                    .show()
-            }
+        try {
 
 
-        })
+            apiManager.getNews(object : ApiManager.ApiCallback<ArrayList<Pair<String, String>>> {
+                override fun onSuccess(data: ArrayList<Pair<String, String>>) {
+
+                    newsData = data
+                    refreshNews()
+                }
+
+                override fun onError(errorMessage: String) {
+                    Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+
+            })
+
+        } catch (ex: Exception) {
+            Toast.makeText(this@MarketActivity, "Exception : ${ex.message}", Toast.LENGTH_SHORT)
+                .show()
+        }
 
     }
 
