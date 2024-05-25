@@ -5,7 +5,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.baharlou.crypto.R
+import com.baharlou.crypto.apiManager.ALL
 import com.baharlou.crypto.apiManager.ApiManager
+import com.baharlou.crypto.apiManager.HOUR
+import com.baharlou.crypto.apiManager.HOURS24
+import com.baharlou.crypto.apiManager.MONTH
+import com.baharlou.crypto.apiManager.MONTH3
+import com.baharlou.crypto.apiManager.WEEK
+import com.baharlou.crypto.apiManager.YEAR
 import com.baharlou.crypto.apiManager.model.ChartData
 import com.baharlou.crypto.apiManager.model.CoinAboutItem
 import com.baharlou.crypto.apiManager.model.CoinsData
@@ -89,11 +97,55 @@ class CoinActivity : AppCompatActivity() {
 
     private fun initChart() {
 
-        apiManager.getChartData("BTC", "Hour", object :
+        var period: String = HOUR
+
+        requestAndShowChart(period)
+
+        binding.moduleChart.radioGroupMain.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+
+                R.id.radio_12h -> {
+                    period = HOUR
+                }
+
+                R.id.radio_1d -> {
+                    period = HOURS24
+                }
+
+                R.id.radio_1w -> {
+                    period = WEEK
+                }
+
+                R.id.radio_1m -> {
+                    period = MONTH
+                }
+
+                R.id.radio_3m -> {
+                    period = MONTH3
+                }
+
+                R.id.radio_1y -> {
+                    period = YEAR
+                }
+
+                R.id.radio_all -> {
+                    period = ALL
+                }
+
+
+            }
+            requestAndShowChart(period)
+        }
+
+    }
+
+    private fun requestAndShowChart(period: String) {
+        apiManager.getChartData(dataCoin.coinInfo.name, period, object :
             ApiManager.ApiCallback<Pair<List<ChartData.Data>, ChartData.Data?>> {
             override fun onSuccess(data: Pair<List<ChartData.Data>, ChartData.Data?>) {
 
-                val chartAdapter =
+                val chartAdapter = ChartAdapter(data.first, data.second?.open.toString())
+                binding.moduleChart.sparkMain.adapter = chartAdapter
 
             }
 

@@ -18,4 +18,12 @@ class ChartAdapter(
     override fun getY(index: Int): Float {
         return historicalData[index].close.toFloat()
     }
+
+    override fun hasBaseLine(): Boolean {
+        return true
+    }
+
+    override fun getBaseLine(): Float {
+        return baseLine?.toFloat()  ?: super.getBaseLine()
+    }
 }
