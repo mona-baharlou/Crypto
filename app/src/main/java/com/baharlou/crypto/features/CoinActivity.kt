@@ -1,6 +1,7 @@
 package com.baharlou.crypto.features
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.baharlou.crypto.apiManager.model.CoinAboutData
@@ -11,6 +12,7 @@ import com.baharlou.crypto.features.market.ABOUT_DATA
 import com.baharlou.crypto.features.market.BUNDLE_DATA
 import com.baharlou.crypto.features.market.COIN_DATA
 
+private const val TWITTER_BASE_URL = "https://twitter.com/"
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding
@@ -45,8 +47,28 @@ class CoinActivity : AppCompatActivity() {
         binding.moduleAbout.tvAboutCoin.text = dataAboutCoin.coinDesc
         binding.moduleAbout.tvGithub.text = dataAboutCoin.coinGithub
         binding.moduleAbout.tvReddit.text = dataAboutCoin.coinReddit
-        binding.moduleAbout.tvTwitter.text = dataAboutCoin.coinTwitter
+        binding.moduleAbout.tvTwitter.text = "@${dataAboutCoin.coinTwitter}"
 
+        binding.moduleAbout.tvWebsite.setOnClickListener {
+            openAboutWebsite(dataAboutCoin.coinWebsite.toString())
+        }
+
+        binding.moduleAbout.tvGithub.setOnClickListener {
+            openAboutWebsite(dataAboutCoin.coinGithub.toString())
+        }
+
+        binding.moduleAbout.tvReddit.setOnClickListener {
+            openAboutWebsite(dataAboutCoin.coinReddit.toString())
+        }
+
+        binding.moduleAbout.tvTwitter.setOnClickListener {
+            openAboutWebsite(TWITTER_BASE_URL + dataAboutCoin.coinWebsite.toString())
+        }
+    }
+
+    private fun openAboutWebsite(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     private fun initStatistics() {
