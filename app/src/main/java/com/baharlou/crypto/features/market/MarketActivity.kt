@@ -25,7 +25,6 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         binding = ActivityMarketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initUI()
 
         loadMore()
 
@@ -35,6 +34,11 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
                 binding.swipeRefreshMain.isRefreshing = false
             }, 1500)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initUI()
     }
 
     private fun loadMore() {
