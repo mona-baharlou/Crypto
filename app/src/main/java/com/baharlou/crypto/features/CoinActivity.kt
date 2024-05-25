@@ -62,7 +62,7 @@ class CoinActivity : AppCompatActivity() {
         }
 
         binding.moduleAbout.tvTwitter.setOnClickListener {
-            openAboutWebsite(TWITTER_BASE_URL + dataAboutCoin.coinWebsite.toString())
+            openAboutWebsite(TWITTER_BASE_URL + dataAboutCoin.coinTwitter.toString())
         }
     }
 
