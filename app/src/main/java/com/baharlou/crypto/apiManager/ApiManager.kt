@@ -1,5 +1,6 @@
 package com.baharlou.crypto.apiManager
 
+import com.baharlou.crypto.apiManager.model.ChartData
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.apiManager.model.NewsData
 import okhttp3.OkHttpClient
@@ -8,14 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-const val BASE_URL = "https://min-api.cryptocompare.com/data/"
-const val BASE_URL_IMAGE = "https://www.cryptocompare.com"
-const val API_KEY = "a2de58965c9c6c51f61f752c951ff3fe72385f7547e1e43bed1247f40e28dacc"
-const val API_KEY1 =
-    "authorization: ApiKey a2de58965c9c6c51f61f752c951ff3fe72385f7547e1e43bed1247f40e28dacc"
-const val APP_NAME = "Crypto"
-
 
 class ApiManager {
 
@@ -80,6 +73,79 @@ class ApiManager {
 
         })
     }
+
+    fun getChartData(
+        symbol: String,
+        period: String,
+        apiCallback: ApiCallback<Pair<List<ChartData.Data>, ChartData.Data?>>
+    ) {
+
+        var histoPeriod = ""
+        var limit = 30
+        var aggregate = 1
+
+        when (period) {
+
+            HOUR -> {
+                histoPeriod = HISTO_MINUTE
+                limit = 60
+                aggregate = 12
+            }
+
+            HOURS24 -> {
+                histoPeriod = HISTO_HOUR
+                limit = 24
+            }
+
+            MONTH -> {
+                histoPeriod = HISTO_DAY
+                limit = 30
+            }
+
+            MONTH3 -> {
+                histoPeriod = HISTO_DAY
+                limit = 90
+            }
+
+            WEEK -> {
+                histoPeriod = HISTO_HOUR
+                aggregate = 6
+            }
+
+            YEAR -> {
+                histoPeriod = HISTO_DAY
+                aggregate = 13
+            }
+
+            ALL -> {
+                histoPeriod = HISTO_DAY
+                aggregate = 30
+                limit = 2000
+            }
+
+        }
+
+        apiService.getChartInfo(histoPeriod, symbol, limit, aggregate)
+            .enqueue(object : Callback<ChartData> {
+                override fun onResponse(call: Call<ChartData>, response: Response<ChartData>) {
+
+                    val dataFull = response.body()!!
+                    val data1 = dataFull.data
+                    val data2 = dataFull.data.maxByOrNull { it.close.toFloat() }
+                    val returningData = Pair(data1, data2)
+
+                    apiCallback.onSuccess(returningData)
+
+                }
+
+                override fun onFailure(call: Call<ChartData>, t: Throwable) {
+                    apiCallback.onError(t.message!!)
+                }
+
+            })
+
+    }
+
 
     interface ApiCallback<T> {
 
