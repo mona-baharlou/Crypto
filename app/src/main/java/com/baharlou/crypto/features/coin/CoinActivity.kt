@@ -1,10 +1,12 @@
 package com.baharlou.crypto.features.coin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.baharlou.crypto.R
 import com.baharlou.crypto.apiManager.ALL
 import com.baharlou.crypto.apiManager.ApiManager
@@ -40,7 +42,13 @@ class CoinActivity : AppCompatActivity() {
         val fromBundle = intent.getBundleExtra(BUNDLE_DATA)!!
 
         dataCoin = fromBundle.getParcelable<CoinsData.Data>(COIN_DATA)!!
-        dataAboutCoin = fromBundle.getParcelable<CoinAboutItem>(ABOUT_DATA)!!
+
+        if (fromBundle.getParcelable<CoinAboutItem>(ABOUT_DATA) != null) {
+            dataAboutCoin = fromBundle.getParcelable<CoinAboutItem>(ABOUT_DATA)!!
+        } else {
+            dataAboutCoin = CoinAboutItem()
+        }
+
 
         binding.toolbar.toolbar.title = dataCoin.coinInfo.name
 
@@ -83,6 +91,7 @@ class CoinActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initStatistics() {
         binding.moduleStatistics.tvOpenAmount.text = dataCoin.dISPLAY.uSD.oPEN24HOUR
         binding.moduleStatistics.tvTodayHigh.text = dataCoin.dISPLAY.uSD.hIGH24HOUR
@@ -95,6 +104,7 @@ class CoinActivity : AppCompatActivity() {
         binding.moduleStatistics.tvSupply.text = dataCoin.dISPLAY.uSD.sUPPLY
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initChart() {
 
         var period: String = HOUR
@@ -135,6 +145,79 @@ class CoinActivity : AppCompatActivity() {
 
             }
             requestAndShowChart(period)
+        }
+
+        binding.moduleChart.txtChartPrice.text = dataCoin.dISPLAY.uSD.pRICE
+        binding.moduleChart.txtChartChange1.text = " " + dataCoin.dISPLAY.uSD.cHANGE24HOUR
+
+        if (dataCoin.coinInfo.fullName == "BUSD") {
+            binding.moduleChart.txtChartChange2.text = "0%"
+        } else {
+            binding.moduleChart.txtChartChange2.text =
+                dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
+        }
+
+        val taghir = dataCoin.rAW.uSD.cHANGEPCT24HOUR
+        if (taghir > 0) {
+
+            binding.moduleChart.txtChartChange2.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.colorGain
+                )
+            )
+
+            binding.moduleChart.txtChartUpdown.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.colorGain
+                )
+            )
+
+            binding.moduleChart.txtChartUpdown.text = "▲"
+
+            binding.moduleChart.sparkMain.lineColor = ContextCompat.getColor(
+                binding.root.context,
+                R.color.colorGain
+            )
+
+        } else if (taghir < 0) {
+
+            binding.moduleChart.txtChartChange2.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.colorLoss
+                )
+            )
+
+            binding.moduleChart.txtChartUpdown.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.colorLoss
+                )
+            )
+
+            binding.moduleChart.txtChartUpdown.text = "▼"
+
+            binding.moduleChart.sparkMain.lineColor = ContextCompat.getColor(
+                binding.root.context,
+                R.color.colorLoss
+            )
+
+
+        }
+
+        binding.moduleChart.sparkMain.setScrubListener {
+
+            // show price kamel
+            if (it == null) {
+                binding.moduleChart.txtChartPrice.text = dataCoin.dISPLAY.uSD.pRICE
+            } else {
+                // show price this dot
+                binding.moduleChart.txtChartPrice.text =
+                    "$ " + (it as ChartData.Data).close.toString()
+            }
+
         }
 
     }

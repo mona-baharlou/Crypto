@@ -125,16 +125,13 @@ class ApiManager {
 
         }
 
-        apiService.getChartInfo(histoPeriod, symbol, limit, aggregate)
+        apiService.getChartData(histoPeriod, symbol, limit, aggregate)
             .enqueue(object : Callback<ChartData> {
                 override fun onResponse(call: Call<ChartData>, response: Response<ChartData>) {
 
                     val dataFull = response.body()!!
                     val data1 = dataFull.data
-
-                    //baseline values =>  max close price value
                     val data2 = dataFull.data.maxByOrNull { it.close.toFloat() }
-
                     val returningData = Pair(data1, data2)
 
                     apiCallback.onSuccess(returningData)
@@ -148,6 +145,7 @@ class ApiManager {
             })
 
     }
+
 
 
     interface ApiCallback<T> {

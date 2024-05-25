@@ -22,13 +22,13 @@ interface ApiService {
     ): Call<CoinsData>
 
     @GET("{period}")
-    fun getChartInfo(
-        @Path("period") period: String,
-        @Query("fsym") fromSymbol: String,
-        @Query("limit") limitData: Int = 10,
-        @Query("aggregate") aggregate: Int,
-        @Query("tsym") toSymbol: String = "USD",
-    ): Call<ChartData>
+    fun getChartData(
+        @Path("period") period :String ,
+        @Query("fsym") fromSymbol :String ,
+        @Query("limit") limit :Int ,
+        @Query("aggregate")  aggregate:Int ,
+        @Query("tsym") toSymbol :String = "USD"
+    ) :Call<ChartData>
 
 
 }
