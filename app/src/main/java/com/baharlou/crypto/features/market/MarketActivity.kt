@@ -1,15 +1,17 @@
-package com.baharlou.crypto.features
+package com.baharlou.crypto.features.market
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.baharlou.crypto.apiManager.ApiManager
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
+import com.baharlou.crypto.features.CoinActivity
 
-class MarketActivity : AppCompatActivity() {
+class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private lateinit var binding: ActivityMarketBinding
     var apiManager = ApiManager()
@@ -54,6 +56,11 @@ class MarketActivity : AppCompatActivity() {
 
     private fun showData(data: List<CoinsData.Data>) {
 
+        val marketAdapter = MarketAdapter(ArrayList(data), this)
+        binding.moduleWatchlist.recyclerMain.adapter = marketAdapter
+        binding.moduleWatchlist.recyclerMain.layoutManager = LinearLayoutManager(this)
+
+
     }
 
     private fun getNews() {
@@ -97,5 +104,11 @@ class MarketActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onCoinItemClicked(dataCoin: CoinsData.Data) {
+        val intent = Intent(this, CoinActivity::class.java)
+        intent.putExtra("dataToSend", dataCoin)
+        startActivity(intent)
     }
 }

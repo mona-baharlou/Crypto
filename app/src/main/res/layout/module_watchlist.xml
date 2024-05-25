@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="3"
-        tools:listitem="@layout/item_recycler_news" />
+        tools:listitem="@layout/item_recycler_market" />
 
     <View
 
