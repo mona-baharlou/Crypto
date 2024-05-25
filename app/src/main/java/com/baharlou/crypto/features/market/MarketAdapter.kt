@@ -25,7 +25,7 @@ class MarketAdapter(
         fun bindViews(dataCoin: CoinsData.Data) {
 
             binding.txtCoinName.text = dataCoin.coinInfo.fullName
-            binding.txtPrice.text = "$" + dataCoin.rAW.uSD.pRICE.toString()
+            binding.txtPrice.text = dataCoin.dISPLAY.uSD.pRICE
 
             val change = dataCoin.rAW.uSD.cHANGEPCT24HOUR
             if (change > 0) {
