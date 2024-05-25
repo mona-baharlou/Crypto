@@ -9,9 +9,11 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baharlou.crypto.apiManager.ApiManager
+import com.baharlou.crypto.apiManager.model.CoinAboutData
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
 import com.baharlou.crypto.features.CoinActivity
+import com.google.gson.Gson
 
 class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
@@ -51,6 +53,21 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     private fun initUI() {
         getNews()
         getCoins()
+        getAbout()
+    }
+
+    private fun getAbout() {
+        val fileInString = applicationContext.assets
+            .open("currencyinfo.json")
+            .bufferedReader()
+            .use {
+                it.readText()
+            }
+
+
+        val gson = Gson()
+        val dataAbout = gson.fromJson(fileInString, CoinAboutData::class.java)
+
     }
 
     private fun getCoins() {
