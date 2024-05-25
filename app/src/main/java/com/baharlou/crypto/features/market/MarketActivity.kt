@@ -24,6 +24,15 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         setContentView(binding.root)
 
         initUI()
+
+        loadMore()
+    }
+
+    private fun loadMore() {
+        binding.moduleWatchlist.btnShowMore.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.livecoinwatch.com/"))
+            startActivity(intent)
+        }
     }
 
     private fun initUI() {
