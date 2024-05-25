@@ -131,7 +131,10 @@ class ApiManager {
 
                     val dataFull = response.body()!!
                     val data1 = dataFull.data
+
+                    //baseline values =>  max close price value
                     val data2 = dataFull.data.maxByOrNull { it.close.toFloat() }
+
                     val returningData = Pair(data1, data2)
 
                     apiCallback.onSuccess(returningData)

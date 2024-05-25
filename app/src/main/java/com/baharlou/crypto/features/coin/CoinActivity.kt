@@ -3,7 +3,10 @@ package com.baharlou.crypto.features.coin
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.baharlou.crypto.apiManager.ApiManager
+import com.baharlou.crypto.apiManager.model.ChartData
 import com.baharlou.crypto.apiManager.model.CoinAboutItem
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityCoinBinding
@@ -18,6 +21,7 @@ class CoinActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCoinBinding
     private lateinit var dataCoin: CoinsData.Data
     private lateinit var dataAboutCoin: CoinAboutItem
+    private var apiManager = ApiManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +88,21 @@ class CoinActivity : AppCompatActivity() {
     }
 
     private fun initChart() {
+
+        apiManager.getChartData("BTC", "Hour", object :
+            ApiManager.ApiCallback<Pair<List<ChartData.Data>, ChartData.Data?>> {
+            override fun onSuccess(data: Pair<List<ChartData.Data>, ChartData.Data?>) {
+
+                val chartAdapter =
+
+            }
+
+            override fun onError(errorMessage: String) {
+                Toast.makeText(this@CoinActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        })
 
     }
 }
