@@ -16,12 +16,16 @@ import com.baharlou.crypto.databinding.ActivityMarketBinding
 import com.baharlou.crypto.features.CoinActivity
 import com.google.gson.Gson
 
+const val COIN_DATA = "coin_data"
+const val ABOUT_DATA = "about_data"
+const val BUNDLE_DATA = "bundle"
+
 class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private lateinit var binding: ActivityMarketBinding
     var apiManager = ApiManager()
     lateinit var newsData: ArrayList<Pair<String, String>>
-
+    lateinit var aboutDataMap: MutableMap<String, CoinAboutItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +34,8 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
 
         loadMore()
+        getAbout()
+
 
         binding.swipeRefreshMain.setOnRefreshListener {
             initUI()
@@ -54,7 +60,6 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     private fun initUI() {
         getNews()
         getCoins()
-        getAbout()
     }
 
     private fun getAbout() {
@@ -66,12 +71,21 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
             }
 
 
-        val aboutDataMap = mutableMapOf<String, CoinAboutItem>()
+        aboutDataMap = mutableMapOf<String, CoinAboutItem>()
         val gson = Gson()
         val dataAbout = gson.fromJson(fileInString, CoinAboutData::class.java)
-        dataAbout.forEach {
 
+        dataAbout.forEach {
+            aboutDataMap[it.currencyName] = CoinAboutItem(
+                coinWebsite = it.info.web,
+                coinGithub = it.info.github,
+                coinTwitter = it.info.twt,
+                coinReddit = it.info.reddit,
+                coinDesc = it.info.desc
+            )
         }
+
+
     }
 
     private fun getCoins() {
@@ -145,7 +159,13 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     override fun onCoinItemClicked(dataCoin: CoinsData.Data) {
         val intent = Intent(this, CoinActivity::class.java)
-        intent.putExtra("dataToSend", dataCoin)
+
+        //val pair = Pair(dataCoin, aboutDataMap[dataCoin.coinInfo.name]!!)
+
+        val bundle = Bundle()
+        bundle.putParcelable(COIN_DATA, dataCoin)
+        bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.coinInfo.name]!!)
+        intent.putExtra(BUNDLE_DATA, bundle)
         startActivity(intent)
     }
 }

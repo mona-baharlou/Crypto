@@ -3,13 +3,19 @@ package com.baharlou.crypto.features
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.baharlou.crypto.apiManager.model.CoinAboutData
+import com.baharlou.crypto.apiManager.model.CoinAboutItem
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityCoinBinding
+import com.baharlou.crypto.features.market.ABOUT_DATA
+import com.baharlou.crypto.features.market.BUNDLE_DATA
+import com.baharlou.crypto.features.market.COIN_DATA
 
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding
     private lateinit var dataCoin: CoinsData.Data
+    private lateinit var dataAboutCoin: CoinAboutItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +23,11 @@ class CoinActivity : AppCompatActivity() {
         binding = ActivityCoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dataCoin = intent.getParcelableExtra<CoinsData.Data>("dataToSend")!!
+        val fromBundle = intent.getBundleExtra(BUNDLE_DATA)!!
+
+        dataCoin = fromBundle.getParcelable<CoinsData.Data>(COIN_DATA)!!
+        dataAboutCoin = fromBundle.getParcelable<CoinAboutItem>(ABOUT_DATA)!!
+
         binding.toolbar.toolbar.title = dataCoin.coinInfo.name
 
         initUI()
@@ -31,7 +41,11 @@ class CoinActivity : AppCompatActivity() {
 
     private fun initAbout() {
 
-
+        binding.moduleAbout.tvWebsite.text = dataAboutCoin.coinWebsite
+        binding.moduleAbout.tvAboutCoin.text = dataAboutCoin.coinDesc
+        binding.moduleAbout.tvGithub.text = dataAboutCoin.coinGithub
+        binding.moduleAbout.tvReddit.text = dataAboutCoin.coinReddit
+        binding.moduleAbout.tvTwitter.text = dataAboutCoin.coinTwitter
 
     }
 
