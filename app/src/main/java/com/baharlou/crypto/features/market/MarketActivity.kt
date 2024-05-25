@@ -23,18 +23,12 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         binding = ActivityMarketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         initUI()
-
     }
 
     private fun initUI() {
-
         getNews()
-
         getCoins()
-
     }
 
     private fun getCoins() {
