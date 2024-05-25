@@ -1,5 +1,6 @@
 package com.baharlou.crypto.apiManager
 
+import android.util.Log
 import android.widget.Toast
 import com.baharlou.crypto.apiManager.model.ChartData
 import com.baharlou.crypto.apiManager.model.CoinsData
@@ -129,14 +130,16 @@ class ApiManager {
         apiService.getChartData(histoPeriod, symbol, limit, aggregate)
             .enqueue(object : Callback<ChartData> {
                 override fun onResponse(call: Call<ChartData>, response: Response<ChartData>) {
+                    try {
+                        val dataFull = response.body()!!
+                        val data1 = dataFull.data
+                        val data2 = dataFull.data.maxByOrNull { it.close.toFloat() }
+                        val returningData = Pair(data1, data2)
 
-                    val dataFull = response.body()!!
-                    val data1 = dataFull.data
-                    val data2 = dataFull.data.maxByOrNull { it.close.toFloat() }
-                    val returningData = Pair(data1, data2)
-
-                    apiCallback.onSuccess(returningData)
-
+                        apiCallback.onSuccess(returningData)
+                    } catch (ex: Exception) {
+                        Log.d("histoo ", "onResponse: ${ex.message}")
+                    }
                 }
 
                 override fun onFailure(call: Call<ChartData>, t: Throwable) {
