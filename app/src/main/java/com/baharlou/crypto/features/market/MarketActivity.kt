@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baharlou.crypto.apiManager.ApiManager
@@ -26,6 +28,13 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         initUI()
 
         loadMore()
+
+        binding.swipeRefreshMain.setOnRefreshListener {
+            initUI()
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.swipeRefreshMain.isRefreshing = false
+            }, 1500)
+        }
     }
 
     private fun loadMore() {
