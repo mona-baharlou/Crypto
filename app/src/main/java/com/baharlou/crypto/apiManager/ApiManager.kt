@@ -1,5 +1,6 @@
 package com.baharlou.crypto.apiManager
 
+import android.widget.Toast
 import com.baharlou.crypto.apiManager.model.ChartData
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.apiManager.model.NewsData
@@ -145,7 +146,6 @@ class ApiManager {
             })
 
     }
-
 
 
     interface ApiCallback<T> {

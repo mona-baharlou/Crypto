@@ -219,7 +219,6 @@ class CoinActivity : AppCompatActivity() {
             }
 
         }
-
     }
 
     private fun requestAndShowChart(period: String) {
