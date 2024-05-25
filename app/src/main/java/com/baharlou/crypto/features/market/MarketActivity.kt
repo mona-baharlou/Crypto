@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baharlou.crypto.apiManager.ApiManager
 import com.baharlou.crypto.apiManager.model.CoinAboutData
+import com.baharlou.crypto.apiManager.model.CoinAboutItem
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
 import com.baharlou.crypto.features.CoinActivity
@@ -65,9 +66,12 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
             }
 
 
+        val aboutDataMap = mutableMapOf<String, CoinAboutItem>()
         val gson = Gson()
         val dataAbout = gson.fromJson(fileInString, CoinAboutData::class.java)
+        dataAbout.forEach {
 
+        }
     }
 
     private fun getCoins() {
