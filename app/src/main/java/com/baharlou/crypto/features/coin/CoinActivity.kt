@@ -1,10 +1,9 @@
-package com.baharlou.crypto.features
+package com.baharlou.crypto.features.coin
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.baharlou.crypto.apiManager.model.CoinAboutData
+import androidx.appcompat.app.AppCompatActivity
 import com.baharlou.crypto.apiManager.model.CoinAboutItem
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityCoinBinding
@@ -13,6 +12,7 @@ import com.baharlou.crypto.features.market.BUNDLE_DATA
 import com.baharlou.crypto.features.market.COIN_DATA
 
 private const val TWITTER_BASE_URL = "https://twitter.com/"
+
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding

@@ -13,7 +13,7 @@ import com.baharlou.crypto.apiManager.model.CoinAboutData
 import com.baharlou.crypto.apiManager.model.CoinAboutItem
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
-import com.baharlou.crypto.features.CoinActivity
+import com.baharlou.crypto.features.coin.CoinActivity
 import com.google.gson.Gson
 
 const val COIN_DATA = "coin_data"
