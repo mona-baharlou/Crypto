@@ -1,5 +1,6 @@
 package com.baharlou.crypto.apiManager
 
+import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.apiManager.model.NewsData
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -58,6 +59,22 @@ class ApiManager {
             }
 
             override fun onFailure(call: Call<NewsData>, t: Throwable) {
+                apiCallback.onError(t.message!!)
+            }
+
+        })
+    }
+
+    fun getCoinList(apiCallback: ApiCallback<List<CoinsData.Data>>) {
+        apiService.getTopCoins().enqueue(object : Callback<CoinsData> {
+            override fun onResponse(call: Call<CoinsData>, response: Response<CoinsData>) {
+
+                val data = response.body()!!
+
+                apiCallback.onSuccess(data.data)
+            }
+
+            override fun onFailure(call: Call<CoinsData>, t: Throwable) {
                 apiCallback.onError(t.message!!)
             }
 

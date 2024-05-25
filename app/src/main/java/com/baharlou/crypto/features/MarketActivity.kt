@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.baharlou.crypto.apiManager.ApiManager
+import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
 
 class MarketActivity : AppCompatActivity() {
@@ -35,6 +36,23 @@ class MarketActivity : AppCompatActivity() {
     }
 
     private fun getCoins() {
+
+        apiManager.getCoinList(object : ApiManager.ApiCallback<List<CoinsData.Data>> {
+            override fun onSuccess(data: List<CoinsData.Data>) {
+                showData(data)
+
+            }
+
+            override fun onError(errorMessage: String) {
+                Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        })
+
+    }
+
+    private fun showData(data: List<CoinsData.Data>) {
 
     }
 
