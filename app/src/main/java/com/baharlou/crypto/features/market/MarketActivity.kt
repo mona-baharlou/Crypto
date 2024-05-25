@@ -92,7 +92,7 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
         apiManager.getCoinList(object : ApiManager.ApiCallback<List<CoinsData.Data>> {
             override fun onSuccess(data: List<CoinsData.Data>) {
-                showData(data)
+                showData(cleanDataFromServer(data))
 
             }
 
@@ -103,6 +103,18 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
         })
 
+    }
+
+    private fun cleanDataFromServer(data: List<CoinsData.Data>): List<CoinsData.Data> {
+        val newData = mutableListOf<CoinsData.Data>()
+       // val newData = data.toMutableList()
+        data.forEach {
+            if (it.rAW != null || it.dISPLAY != null) {
+                newData.add(it)
+            }
+        }
+
+        return newData
     }
 
     private fun showData(data: List<CoinsData.Data>) {
