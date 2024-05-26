@@ -22,25 +22,25 @@ ChartAdapter(
         return historicalData[index].close.toFloat()
     }
 
-    /*override fun hasBaseLine(): Boolean {
+    override fun hasBaseLine(): Boolean {
         return true
     }
 
-    override fun getBaseLine(): Float {
-        try {
-            return baseLine//?.toFloat() ?: super.getBaseLine().toFloat()
+    /* override fun getBaseLine(): Float {
+         try {
+             return baseLine//?.toFloat() ?: super.getBaseLine().toFloat()
 
-        } catch (ex: Exception) {
-            Log.e("getBaseLineErr", "getBaseLine:${ex.message} ")
-            return ("0").toFloat()
-        }
-    }
+         } catch (ex: Exception) {
+             Log.e("getBaseLineErr", "getBaseLine:${ex.message} ")
+             return ("0").toFloat()
+         }
+     }
 
-    override fun getDataBounds(): RectF {
-        val bounds = super.getDataBounds()
+     override fun getDataBounds(): RectF {
+         val bounds = super.getDataBounds()
 
-        // will 'zoom in' to the middle portion of the graph
-        bounds.inset(bounds.width() / 4, bounds.height() / 4)
-        return bounds
-    }*/
+         // will 'zoom in' to the middle portion of the graph
+         bounds.inset(bounds.width() / 4, bounds.height() / 4)
+         return bounds
+     }*/
 }
