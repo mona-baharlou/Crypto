@@ -1,6 +1,7 @@
 package com.baharlou.crypto.features.market
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,11 +57,15 @@ class MarketAdapter(
                 binding.txtMarketcap.text =
                     "$" + marketCap.toString().substring(0, indexDot + 3) + " B"
 
-                Glide
-                    .with(itemView)
-                    .load(BASE_URL_IMAGE + dataCoin.coinInfo.imageUrl)
-                    .into(binding.imgItem)
-
+                try {
+                    Glide
+                        .with(itemView)
+                        .load(BASE_URL_IMAGE + dataCoin.coinInfo.imageUrl)
+                        .into(binding.imgItem)
+                }
+                catch (ex:Exception){
+                    Log.e("glideErr123 ", "bindViews: glide error:${ex.message}", )
+                }
 
                 itemView.setOnClickListener {
                     recyclerCallback.onCoinItemClicked(dataCoin)

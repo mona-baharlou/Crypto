@@ -5,12 +5,14 @@ import android.widget.Toast
 import com.baharlou.crypto.apiManager.model.ChartData
 import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.apiManager.model.NewsData
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ApiManager {
 
@@ -18,7 +20,11 @@ class ApiManager {
 
     init {
 
-        val okHttpClient = OkHttpClient.Builder().addInterceptor {
+        val okHttpClient = OkHttpClient.Builder()
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .connectionPool(ConnectionPool(0, 5, TimeUnit.MINUTES))
+            .addInterceptor {
             val oldRequest = it.request()
 
             val newRequest = oldRequest.newBuilder()
