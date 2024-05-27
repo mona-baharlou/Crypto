@@ -58,24 +58,12 @@ class CoinActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        try {
             initChart()
-        } catch (ex: Exception) {
-            Toast.makeText(this, "exce11p: ${ex.message}", Toast.LENGTH_SHORT).show()
-        }
 
-        try {
 
             initStatistics()
-        } catch (ex: Exception) {
-            Toast.makeText(this, "ex22cep: ${ex.message}", Toast.LENGTH_SHORT).show()
-        }
 
-        try {
             initAbout()
-        } catch (ex: Exception) {
-            Toast.makeText(this, "exc33ep: ${ex.message}", Toast.LENGTH_SHORT).show()
-        }
 
     }
 
@@ -172,7 +160,7 @@ class CoinActivity : AppCompatActivity() {
             binding.moduleChart.txtChartChange2.text = "0%"
         } else {
             binding.moduleChart.txtChartChange2.text =
-                dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 3) + "%"
+                dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
             //dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
         }
 
@@ -244,13 +232,8 @@ class CoinActivity : AppCompatActivity() {
         apiManager.getChartData(dataCoin.coinInfo.name, period, object :
             ApiManager.ApiCallback<Pair<List<ChartData.Data>, ChartData.Data?>> {
             override fun onSuccess(data: Pair<List<ChartData.Data>, ChartData.Data?>) {
-                try {
                     val chartAdapter = ChartAdapter(data.first, data.second?.open.toString())
                     binding.moduleChart.sparkMain.adapter = chartAdapter
-                } catch (ex: Exception) {
-                    Toast.makeText(this@CoinActivity, "ex125: ${ex.message}", Toast.LENGTH_SHORT)
-                        .show()
-                }
             }
 
             override fun onError(errorMessage: String) {
