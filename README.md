@@ -13,6 +13,9 @@ This Android app allows users to check the latest price of various cryptocurrenc
 
 
   ![](app/src/main/res/drawable/crypto.gif)
+  ![](app/src/main/res/drawable/a.jpg)
+  ![](app/src/main/res/drawable/b.jpg)
+  ![](app/src/main/res/drawable/c.jpg)
   
 ## Future Development
 - Offline mode for viewing portfolio and prices without internet connection
