@@ -11,4 +11,11 @@ This Android app allows users to check the latest price of various cryptocurrenc
 - View a chart showing the balance of the selected cryptocurrency over 12 hours, 1 day, 1 week, 1 month, 3 months, and one year
 - Access Twitter, website, and other related links of the selected cryptocurrency in the detail section
 
+
   ![](app/src/main/res/drawable/crypto.gif)
+  
+## Future Development
+- Offline mode for viewing portfolio and prices without internet connection
+- Watchlist for favorite cryptocurrencies
+- Push notifications for price alerts and news updates
+- Implementing DI & Design Pattern
