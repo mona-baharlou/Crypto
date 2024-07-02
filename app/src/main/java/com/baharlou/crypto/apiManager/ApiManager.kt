@@ -89,8 +89,9 @@ class ApiManager {
     ) {
 
         var histoPeriod = ""
-        var limit = 30
-        var aggregate = 1
+        var limit = 30 //the number of data points to return
+        var aggregate = 1 //time period to aggregate data over
+
 
         when (period) {
 

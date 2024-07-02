@@ -49,7 +49,7 @@ class CoinActivity : AppCompatActivity() {
                 dataAboutCoin = CoinAboutItem()
             }
         } catch (ex: Exception) {
-            Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
 
 
             binding.toolbar.toolbar.title = dataCoin.coinInfo.name

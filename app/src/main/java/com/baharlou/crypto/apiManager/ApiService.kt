@@ -24,10 +24,10 @@ interface ApiService {
     @GET("{period}")
     fun getChartData(
         @Path("period") period :String ,
-        @Query("fsym") fromSymbol :String ,
+        @Query("fsym") fromSymbol :String , //crypto name to show
         @Query("limit") limit :Int ,
         @Query("aggregate")  aggregate:Int ,
-        @Query("tsym") toSymbol :String = "USD"
+        @Query("tsym") toSymbol :String = "USD" //convert to usd
     ) :Call<ChartData>
 
 
