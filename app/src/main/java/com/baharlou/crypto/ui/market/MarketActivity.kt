@@ -1,4 +1,4 @@
-package com.baharlou.crypto.features.market
+package com.baharlou.crypto.ui.market
 
 import android.content.Intent
 import android.net.Uri
@@ -8,12 +8,12 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.baharlou.crypto.apiManager.ApiManager
-import com.baharlou.crypto.apiManager.model.CoinAboutData
-import com.baharlou.crypto.apiManager.model.CoinAboutItem
-import com.baharlou.crypto.apiManager.model.CoinsData
+import com.baharlou.crypto.model.ApiManager
+import com.baharlou.crypto.model.data.CoinAboutData
+import com.baharlou.crypto.model.data.CoinAboutItem
+import com.baharlou.crypto.model.data.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
-import com.baharlou.crypto.features.coin.CoinActivity
+import com.baharlou.crypto.ui.coin.CoinActivity
 import com.google.gson.Gson
 
 const val COIN_DATA = "coin_data"

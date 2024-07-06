@@ -1,4 +1,4 @@
-package com.baharlou.crypto.features.market
+package com.baharlou.crypto.ui.market
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.baharlou.crypto.R
-import com.baharlou.crypto.apiManager.BASE_URL_IMAGE
-import com.baharlou.crypto.apiManager.model.CoinsData
+import com.baharlou.crypto.model.BASE_URL_IMAGE
+import com.baharlou.crypto.model.data.CoinsData
 import com.baharlou.crypto.databinding.ItemRecyclerMarketBinding
 import com.bumptech.glide.Glide
 

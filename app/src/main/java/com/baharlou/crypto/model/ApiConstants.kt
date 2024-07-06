@@ -1,4 +1,4 @@
-package com.baharlou.crypto.apiManager
+package com.baharlou.crypto.model
 
 //base url=>
 const val BASE_URL = "https://min-api.cryptocompare.com/data/"

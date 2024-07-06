@@ -1,4 +1,4 @@
- package com.baharlou.crypto.apiManager.model
+ package com.baharlou.crypto.model.data
 
 
 import com.google.gson.annotations.SerializedName

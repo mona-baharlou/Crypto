@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:requestLegacyExternalStorage="true"
@@ -17,10 +16,10 @@
         android:theme="@style/Theme.Crypto"
         tools:targetApi="31">
         <activity
-            android:name=".features.coin.CoinActivity"
+            android:name=".ui.coin.CoinActivity"
             android:exported="false" />
         <activity
-            android:name=".features.market.MarketActivity"
+            android:name=".ui.market.MarketActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.baharlou.crypto.features.coin
+package com.baharlou.crypto.ui.coin
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,21 +8,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.baharlou.crypto.R
-import com.baharlou.crypto.apiManager.ALL
-import com.baharlou.crypto.apiManager.ApiManager
-import com.baharlou.crypto.apiManager.HOUR
-import com.baharlou.crypto.apiManager.HOURS24
-import com.baharlou.crypto.apiManager.MONTH
-import com.baharlou.crypto.apiManager.MONTH3
-import com.baharlou.crypto.apiManager.WEEK
-import com.baharlou.crypto.apiManager.YEAR
-import com.baharlou.crypto.apiManager.model.ChartData
-import com.baharlou.crypto.apiManager.model.CoinAboutItem
-import com.baharlou.crypto.apiManager.model.CoinsData
 import com.baharlou.crypto.databinding.ActivityCoinBinding
-import com.baharlou.crypto.features.market.ABOUT_DATA
-import com.baharlou.crypto.features.market.BUNDLE_DATA
-import com.baharlou.crypto.features.market.COIN_DATA
+import com.baharlou.crypto.ui.market.ABOUT_DATA
+import com.baharlou.crypto.ui.market.BUNDLE_DATA
+import com.baharlou.crypto.ui.market.COIN_DATA
+import com.baharlou.crypto.model.ALL
+import com.baharlou.crypto.model.ApiManager
+import com.baharlou.crypto.model.HOUR
+import com.baharlou.crypto.model.HOURS24
+import com.baharlou.crypto.model.MONTH
+import com.baharlou.crypto.model.MONTH3
+import com.baharlou.crypto.model.WEEK
+import com.baharlou.crypto.model.YEAR
+import com.baharlou.crypto.model.data.ChartData
+import com.baharlou.crypto.model.data.CoinAboutItem
+import com.baharlou.crypto.model.data.CoinsData
 
 private const val TWITTER_BASE_URL = "https://twitter.com/"
 

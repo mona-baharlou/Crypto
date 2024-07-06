@@ -1,12 +1,10 @@
-package com.baharlou.crypto.apiManager
+package com.baharlou.crypto.model.net
 
-import com.baharlou.crypto.apiManager.model.ChartData
-import com.baharlou.crypto.apiManager.model.CoinsData
-import com.baharlou.crypto.apiManager.model.NewsData
-import com.google.gson.JsonObject
+import com.baharlou.crypto.model.data.ChartData
+import com.baharlou.crypto.model.data.CoinsData
+import com.baharlou.crypto.model.data.NewsData
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 

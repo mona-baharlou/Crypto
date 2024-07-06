@@ -1,4 +1,4 @@
-package com.baharlou.crypto.apiManager.model
+package com.baharlou.crypto.model.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

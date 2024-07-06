@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+
     }
 }
 dependencyResolutionManagement {
@@ -11,7 +12,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
-}
+   }
 
 rootProject.name = "Crypto"
 include(":app")

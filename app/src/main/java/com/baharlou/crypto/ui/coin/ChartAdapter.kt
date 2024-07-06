@@ -1,8 +1,6 @@
-package com.baharlou.crypto.features.coin
+package com.baharlou.crypto.ui.coin
 
-import android.graphics.RectF
-import android.util.Log
-import com.baharlou.crypto.apiManager.model.ChartData
+import com.baharlou.crypto.model.data.ChartData
 import com.robinhood.spark.SparkAdapter
 
 class

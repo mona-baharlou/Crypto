@@ -1,10 +1,10 @@
-package com.baharlou.crypto.apiManager
+package com.baharlou.crypto.model
 
 import android.util.Log
-import android.widget.Toast
-import com.baharlou.crypto.apiManager.model.ChartData
-import com.baharlou.crypto.apiManager.model.CoinsData
-import com.baharlou.crypto.apiManager.model.NewsData
+import com.baharlou.crypto.model.data.ChartData
+import com.baharlou.crypto.model.data.CoinsData
+import com.baharlou.crypto.model.data.NewsData
+import com.baharlou.crypto.model.net.ApiService
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import retrofit2.Call
