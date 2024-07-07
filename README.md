@@ -1,6 +1,6 @@
 # CryptoCurrency Android App
 
-This Android app allows users to check the latest price of various cryptocurrencies, as well as stay updated on the latest news in the crypto world. The app utilizes Kotlin for development, Retrofit for network requests, Glide for image loading, and Spark for displaying charts.
+This Android app allows users to check the latest price of various cryptocurrencies, as well as stay updated on the latest news in the crypto world. The app utilizes Kotlin for development, MVVM for better maintenance, Hilt for dependency injection, Retrofit for network requests, Glide for image loading, and Spark for displaying charts.
 
 ## Features
 
@@ -22,4 +22,3 @@ This Android app allows users to check the latest price of various cryptocurrenc
 - Offline mode for viewing portfolio and prices without internet connection
 - Watchlist for favorite cryptocurrencies
 - Push notifications for price alerts and news updates
-- Implementing DI & Design Pattern
