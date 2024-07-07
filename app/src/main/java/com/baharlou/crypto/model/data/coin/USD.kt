@@ -1,8 +1,10 @@
 package com.baharlou.crypto.model.data.coin
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class USD(
 
     @SerializedName("FROMSYMBOL") var FROMSYMBOL: String? = null,
@@ -51,4 +53,4 @@ data class USD(
     @SerializedName("TOTALTOPTIERVOLUME24HTO") var TOTALTOPTIERVOLUME24HTO: String? = null,
     @SerializedName("IMAGEURL") var IMAGEURL: String? = null
 
-)
+): Parcelable

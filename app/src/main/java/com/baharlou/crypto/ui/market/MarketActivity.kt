@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.baharlou.crypto.model.ApiManager
 import com.baharlou.crypto.model.data.CoinAboutData
 import com.baharlou.crypto.model.data.CoinAboutItem
-import com.baharlou.crypto.model.data.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
+import com.baharlou.crypto.model.data.coin.Data
 import com.baharlou.crypto.ui.coin.CoinActivity
 import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
@@ -27,6 +27,7 @@ const val BUNDLE_DATA = "bundle"
 class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private lateinit var binding: ActivityMarketBinding
+
     @Inject
     private lateinit var viewModel: MarketViewModel
 
@@ -98,27 +99,30 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     }
 
     private fun getCoins() {
+        if (viewModel.coinList.value!!.isNotEmpty()) {
+            showData(cleanDataFromServer(viewModel.coinList.value!!))
+        }
 
-        apiManager.getCoinList(object : ApiManager.ApiCallback<List<CoinsData.Data>> {
-            override fun onSuccess(data: List<CoinsData.Data>) {
-                showData(cleanDataFromServer(data))
+        /*  apiManager.getCoinList(object : ApiManager.ApiCallback<List<CoinsData.Data>> {
+              override fun onSuccess(data: List<CoinsData.Data>) {
+                  showData(cleanDataFromServer(data))
 
-            }
+              }
 
-            override fun onError(errorMessage: String) {
-                Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
-                    .show()
-            }
+              override fun onError(errorMessage: String) {
+                  Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
+                      .show()
+              }
 
-        })
-
+          })
+*/
     }
 
-    private fun cleanDataFromServer(data: List<CoinsData.Data>): List<CoinsData.Data> {
-        val newData = mutableListOf<CoinsData.Data>()
+    private fun cleanDataFromServer(data: List<Data>): List<Data> {
+        val newData = mutableListOf<Data>()
         // val newData = data.toMutableList()
         data.forEach {
-            if (it.rAW != null || it.dISPLAY != null) {
+            if (it.RAW != null || it.DISPLAY != null) {
                 newData.add(it)
             }
         }
@@ -126,7 +130,7 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         return newData
     }
 
-    private fun showData(data: List<CoinsData.Data>) {
+    private fun showData(data: List<Data>) {
 
         val marketAdapter = MarketAdapter(ArrayList(data), this)
         binding.moduleWatchlist.recyclerMain.adapter = marketAdapter
@@ -136,30 +140,15 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     }
 
     private fun getNews() {
-
         try {
-
-
-            apiManager.getNews(object : ApiManager.ApiCallback<ArrayList<Pair<String, String>>> {
-                override fun onSuccess(data: ArrayList<Pair<String, String>>) {
-
-                    newsData = data
-                    refreshNews()
-                }
-
-                override fun onError(errorMessage: String) {
-                    Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-
-            })
-
+            if (viewModel.newsList.value!!.isNotEmpty()) {
+                newsData = viewModel.newsList.value!!
+                refreshNews()
+            }
         } catch (ex: Exception) {
             Toast.makeText(this@MarketActivity, "Exception : ${ex.message}", Toast.LENGTH_SHORT)
                 .show()
         }
-
     }
 
     private fun refreshNews() {
@@ -178,14 +167,14 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     }
 
-    override fun onCoinItemClicked(dataCoin: CoinsData.Data) {
+    override fun onCoinItemClicked(dataCoin: Data) {
         val intent = Intent(this, CoinActivity::class.java)
 
         //val pair = Pair(dataCoin, aboutDataMap[dataCoin.coinInfo.name]!!)
 
         val bundle = Bundle()
         bundle.putParcelable(COIN_DATA, dataCoin)
-        bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.coinInfo.name]!!)
+        bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.CoinInfo!!.Name]!!)
         intent.putExtra(BUNDLE_DATA, bundle)
         startActivity(intent)
     }

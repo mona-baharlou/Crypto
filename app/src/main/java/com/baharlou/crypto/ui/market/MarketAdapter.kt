@@ -9,12 +9,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.baharlou.crypto.R
 import com.baharlou.crypto.model.BASE_URL_IMAGE
-import com.baharlou.crypto.model.data.CoinsData
 import com.baharlou.crypto.databinding.ItemRecyclerMarketBinding
+import com.baharlou.crypto.model.data.coin.Data
 import com.bumptech.glide.Glide
 
 class MarketAdapter(
-    private var data: ArrayList<CoinsData.Data>,
+    private var data: ArrayList<Data>,
     private val recyclerCallback: RecyclerCallback
 ) :
     RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
@@ -23,14 +23,14 @@ class MarketAdapter(
     inner class MarketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("SetTextI18n")
-        fun bindViews(dataCoin: CoinsData.Data) {
+        fun bindViews(dataCoin: Data) {
 
-            if (dataCoin.dISPLAY != null && dataCoin.rAW != null) {
-                binding.txtCoinName.text = dataCoin.coinInfo.fullName
-                binding.txtPrice.text = dataCoin.dISPLAY.uSD.pRICE
+            if (dataCoin.DISPLAY != null && dataCoin.RAW != null) {
+                binding.txtCoinName.text = dataCoin.CoinInfo!!.FullName
+                binding.txtPrice.text = dataCoin.RAW!!.USD!!.PRICE
 
-                val change = dataCoin.rAW.uSD.cHANGEPCT24HOUR
-                if (change > 0) {
+                val change = dataCoin.RAW!!.USD!!.CHANGE24HOUR
+                if (change!!.toInt() > 0) {
                     binding.txtMarketName.setTextColor(
                         ContextCompat.getColor(
                             binding.root.context,
@@ -38,8 +38,8 @@ class MarketAdapter(
                         )
                     )
                     binding.txtMarketName.text =
-                        dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 4) + "%"
-                } else if (change < 0) {
+                        dataCoin.RAW?.USD?.CHANGEPCT24HOUR.toString().substring(0, 4) + "%"
+                } else if (change.toInt() < 0) {
                     binding.txtMarketName.setTextColor(
                         ContextCompat.getColor(
                             binding.root.context,
@@ -47,12 +47,12 @@ class MarketAdapter(
                         )
                     )
                     binding.txtMarketName.text =
-                        dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
+                        dataCoin.RAW?.USD?.CHANGEPCT24HOUR.toString().substring(0, 5) + "%"
                 } else {
                     binding.txtMarketName.text = "0%"
                 }
 
-                val marketCap = dataCoin.rAW.uSD.mKTCAP / 1000000000
+                val marketCap = dataCoin.RAW?.USD?.MARKET!!.toInt() / 1000000000
                 val indexDot = marketCap.toString().indexOf('.')
                 binding.txtMarketcap.text =
                     "$" + marketCap.toString().substring(0, indexDot + 3) + " B"
@@ -60,7 +60,7 @@ class MarketAdapter(
                 try {
                     Glide
                         .with(itemView)
-                        .load(BASE_URL_IMAGE + dataCoin.coinInfo.imageUrl)
+                        .load(BASE_URL_IMAGE + dataCoin.CoinInfo?.ImageUrl)
                         .into(binding.imgItem)
                 }
                 catch (ex:Exception){
@@ -90,7 +90,7 @@ class MarketAdapter(
     override fun getItemCount(): Int = data.size
 
     interface RecyclerCallback {
-        fun onCoinItemClicked(dataCoin: CoinsData.Data)
+        fun onCoinItemClicked(dataCoin: Data)
     }
 
 }

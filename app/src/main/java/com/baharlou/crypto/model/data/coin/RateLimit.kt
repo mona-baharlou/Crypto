@@ -1,6 +1,8 @@
 package com.baharlou.crypto.model.data.coin
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-
-class RateLimit()
+@Parcelize
+class RateLimit(): Parcelable

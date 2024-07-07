@@ -1,7 +1,10 @@
 package com.baharlou.crypto.model.data.coin
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 
 data class CoinInfo(
 
@@ -23,4 +26,4 @@ data class CoinInfo(
     @SerializedName("Type") var Type: Int? = null,
     @SerializedName("DocumentType") var DocumentType: String? = null
 
-)
+):Parcelable
