@@ -11,7 +11,12 @@ import com.baharlou.crypto.R
 import com.baharlou.crypto.model.BASE_URL_IMAGE
 import com.baharlou.crypto.databinding.ItemRecyclerMarketBinding
 import com.baharlou.crypto.model.data.coin.Data
+import com.baharlou.crypto.util.ImageHelper
 import com.bumptech.glide.Glide
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewComponent
+import dagger.hilt.components.SingletonComponent
 
 class MarketAdapter(
     private var data: ArrayList<Data>,
@@ -21,6 +26,9 @@ class MarketAdapter(
     lateinit var binding: ItemRecyclerMarketBinding
 
     inner class MarketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+
+        //private val imageHelper: ImageHelper
 
         @SuppressLint("SetTextI18n")
         fun bindViews(dataCoin: Data) {
@@ -62,9 +70,8 @@ class MarketAdapter(
                         .with(itemView)
                         .load(BASE_URL_IMAGE + dataCoin.CoinInfo?.ImageUrl)
                         .into(binding.imgItem)
-                }
-                catch (ex:Exception){
-                    Log.e("glideErr123 ", "bindViews: glide error:${ex.message}", )
+                } catch (ex: Exception) {
+                    Log.e("glideErr123 ", "bindViews: glide error:${ex.message}")
                 }
 
                 itemView.setOnClickListener {
@@ -91,6 +98,12 @@ class MarketAdapter(
 
     interface RecyclerCallback {
         fun onCoinItemClicked(dataCoin: Data)
+    }
+
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface MarketViewHolderEntryPoint {
+        var imageHelper: ImageHelper
     }
 
 }

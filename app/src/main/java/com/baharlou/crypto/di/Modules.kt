@@ -24,12 +24,6 @@ object Modules {
 
     @Provides
     @Singleton
-    fun providesGlide(@ApplicationContext context: Context): RequestManager {
-        return Glide.with(context)
-    }
-
-    @Provides
-    @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()

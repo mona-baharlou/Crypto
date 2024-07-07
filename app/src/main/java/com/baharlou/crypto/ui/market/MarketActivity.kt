@@ -34,9 +34,10 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     @Inject
     lateinit var glide: RequestManager
 
-    var apiManager = ApiManager()
     lateinit var newsData: ArrayList<Pair<String, String>>
     lateinit var aboutDataMap: MutableMap<String, CoinAboutItem>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -68,6 +69,10 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     }
 
     private fun initUI() {
+
+        viewModel.getNews()
+        viewModel.getCoins()
+
         getNews()
         getCoins()
     }
