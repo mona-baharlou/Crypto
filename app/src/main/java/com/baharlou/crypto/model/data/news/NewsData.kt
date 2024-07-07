@@ -1,4 +1,5 @@
-package com.baharlou.crypto.model.data
+/*
+package com.baharlou.crypto.model.data.news
 
 
 import com.google.gson.annotations.SerializedName
@@ -58,4 +59,4 @@ data class NewsData(
     }
 
     class RateLimit
-}
+}*/

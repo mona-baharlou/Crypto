@@ -27,9 +27,11 @@ const val BUNDLE_DATA = "bundle"
 class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private lateinit var binding: ActivityMarketBinding
+    @Inject
+    private lateinit var viewModel: MarketViewModel
 
     @Inject
-    lateinit var glide : RequestManager
+    lateinit var glide: RequestManager
 
     var apiManager = ApiManager()
     lateinit var newsData: ArrayList<Pair<String, String>>
@@ -114,7 +116,7 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private fun cleanDataFromServer(data: List<CoinsData.Data>): List<CoinsData.Data> {
         val newData = mutableListOf<CoinsData.Data>()
-       // val newData = data.toMutableList()
+        // val newData = data.toMutableList()
         data.forEach {
             if (it.rAW != null || it.dISPLAY != null) {
                 newData.add(it)

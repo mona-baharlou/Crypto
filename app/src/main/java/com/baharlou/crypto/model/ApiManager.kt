@@ -2,8 +2,6 @@ package com.baharlou.crypto.model
 
 import android.util.Log
 import com.baharlou.crypto.model.data.ChartData
-import com.baharlou.crypto.model.data.CoinsData
-import com.baharlou.crypto.model.data.NewsData
 import com.baharlou.crypto.model.net.ApiService
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
@@ -46,7 +44,7 @@ class ApiManager {
 
     }
 
-    fun getNews(apiCallback: ApiCallback<ArrayList<Pair<String, String>>>) {
+    /*fun getNews(apiCallback: ApiCallback<ArrayList<Pair<String, String>>>) {
         apiService.getTopNews().enqueue(object : Callback<NewsData> {
             override fun onResponse(call: Call<NewsData>, response: Response<NewsData>) {
                 val data = response.body()!!
@@ -66,7 +64,7 @@ class ApiManager {
         })
     }
 
-    fun getCoinList(apiCallback: ApiCallback<List<CoinsData.Data>>) {
+*/    /*fun getCoinList(apiCallback: ApiCallback<List<CoinsData.Data>>) {
         apiService.getTopCoins().enqueue(object : Callback<CoinsData> {
             override fun onResponse(call: Call<CoinsData>, response: Response<CoinsData>) {
 
@@ -80,7 +78,7 @@ class ApiManager {
             }
 
         })
-    }
+    }*/
 
     fun getChartData(
         symbol: String,

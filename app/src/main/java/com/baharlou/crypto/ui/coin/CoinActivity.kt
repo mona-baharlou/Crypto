@@ -23,12 +23,14 @@ import com.baharlou.crypto.model.YEAR
 import com.baharlou.crypto.model.data.ChartData
 import com.baharlou.crypto.model.data.CoinAboutItem
 import com.baharlou.crypto.model.data.CoinsData
+import javax.inject.Inject
 
 private const val TWITTER_BASE_URL = "https://twitter.com/"
 
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding
+    private @Inject lateinit var viewModel: CoinViewModel
     private lateinit var dataCoin: CoinsData.Data
     private lateinit var dataAboutCoin: CoinAboutItem
     private var apiManager = ApiManager()
