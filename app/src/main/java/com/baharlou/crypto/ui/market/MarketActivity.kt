@@ -14,15 +14,23 @@ import com.baharlou.crypto.model.data.CoinAboutItem
 import com.baharlou.crypto.model.data.CoinsData
 import com.baharlou.crypto.databinding.ActivityMarketBinding
 import com.baharlou.crypto.ui.coin.CoinActivity
+import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val COIN_DATA = "coin_data"
 const val ABOUT_DATA = "about_data"
 const val BUNDLE_DATA = "bundle"
 
+@AndroidEntryPoint
 class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private lateinit var binding: ActivityMarketBinding
+
+    @Inject
+    lateinit var glide : RequestManager
+
     var apiManager = ApiManager()
     lateinit var newsData: ArrayList<Pair<String, String>>
     lateinit var aboutDataMap: MutableMap<String, CoinAboutItem>
@@ -31,7 +39,6 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
         binding = ActivityMarketBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         loadMore()
         getAbout()
