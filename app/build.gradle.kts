@@ -71,16 +71,10 @@ dependencies {
     kapt ("com.github.bumptech.glide:compiler:4.16.0")
 
     val hiltVersion  = "2.51.1"
-    //Hilt
-    //implementation ("com.google.dagger:hilt-android:$hiltVersion")
-    //kapt ("com.google.dagger:hilt-compiler:$hiltVersion")
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
-    //implementation("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
-    //kapt ("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    //ksp("com.google.dagger:hilt-compiler:2.44")
 
 
 
