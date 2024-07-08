@@ -22,7 +22,7 @@ import com.baharlou.crypto.model.WEEK
 import com.baharlou.crypto.model.YEAR
 import com.baharlou.crypto.model.data.ChartData
 import com.baharlou.crypto.model.data.CoinAboutItem
-import com.baharlou.crypto.model.data.CoinsData
+import com.baharlou.crypto.model.data.coin.Data
 import javax.inject.Inject
 
 private const val TWITTER_BASE_URL = "https://twitter.com/"
@@ -30,8 +30,8 @@ private const val TWITTER_BASE_URL = "https://twitter.com/"
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding
-    private @Inject lateinit var viewModel: CoinViewModel
-    private lateinit var dataCoin: CoinsData.Data
+    @Inject lateinit var viewModel: CoinViewModel
+    private lateinit var dataCoin: Data
     private lateinit var dataAboutCoin: CoinAboutItem
     private var apiManager = ApiManager()
 
@@ -43,7 +43,7 @@ class CoinActivity : AppCompatActivity() {
         try {
             val fromBundle = intent.getBundleExtra(BUNDLE_DATA)!!
 
-            dataCoin = fromBundle.getParcelable<CoinsData.Data>(COIN_DATA)!!
+            dataCoin = fromBundle.getParcelable<Data>(COIN_DATA)!!
 
             if (fromBundle.getParcelable<CoinAboutItem>(ABOUT_DATA) != null) {
                 dataAboutCoin = fromBundle.getParcelable<CoinAboutItem>(ABOUT_DATA)!!
@@ -54,7 +54,7 @@ class CoinActivity : AppCompatActivity() {
            // Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
 
 
-            binding.toolbar.toolbar.title = dataCoin.coinInfo.name
+            binding.toolbar.toolbar.title = dataCoin.CoinInfo?.Name
         }
         initUI()
     }
@@ -101,15 +101,15 @@ class CoinActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initStatistics() {
-        binding.moduleStatistics.tvOpenAmount.text = dataCoin.dISPLAY.uSD.oPEN24HOUR
-        binding.moduleStatistics.tvTodayHigh.text = dataCoin.dISPLAY.uSD.hIGH24HOUR
-        binding.moduleStatistics.tvTodayLow.text = dataCoin.dISPLAY.uSD.lOW24HOUR
-        binding.moduleStatistics.tvTodayChange.text = dataCoin.dISPLAY.uSD.cHANGE24HOUR
-        binding.moduleStatistics.tvVolume.text = dataCoin.dISPLAY.uSD.vOLUME24HOUR
-        binding.moduleStatistics.tvVolume.text = dataCoin.dISPLAY.uSD.vOLUME24HOUR
-        binding.moduleStatistics.tvtotalVolume.text = dataCoin.dISPLAY.uSD.tOTALVOLUME24H
-        binding.moduleStatistics.tvMarketCap.text = dataCoin.dISPLAY.uSD.mKTCAP
-        binding.moduleStatistics.tvSupply.text = dataCoin.dISPLAY.uSD.sUPPLY
+        binding.moduleStatistics.tvOpenAmount.text = dataCoin.DISPLAY.USD.OPEN24HOUR
+        binding.moduleStatistics.tvTodayHigh.text = dataCoin.DISPLAY.USD.HIGH24HOUR
+        binding.moduleStatistics.tvTodayLow.text = dataCoin.DISPLAY.USD.LOW24HOUR
+        binding.moduleStatistics.tvTodayChange.text = dataCoin.DISPLAY.USD.CHANGE24HOUR
+        binding.moduleStatistics.tvVolume.text = dataCoin.DISPLAY.USD.VOLUME24HOUR
+        binding.moduleStatistics.tvVolume.text = dataCoin.DISPLAY.USD.VOLUME24HOURTO
+        binding.moduleStatistics.tvtotalVolume.text = dataCoin.DISPLAY.USD.TOTALVOLUME24H
+        binding.moduleStatistics.tvMarketCap.text = dataCoin.DISPLAY.USD.MKTCAP
+        binding.moduleStatistics.tvSupply.text = dataCoin.DISPLAY.USD.SUPPLY
     }
 
     @SuppressLint("SetTextI18n")
@@ -155,18 +155,18 @@ class CoinActivity : AppCompatActivity() {
             requestAndShowChart(period)
         }
 
-        binding.moduleChart.txtChartPrice.text = dataCoin.dISPLAY.uSD.pRICE
-        binding.moduleChart.txtChartChange1.text = " " + dataCoin.dISPLAY.uSD.cHANGE24HOUR
+        binding.moduleChart.txtChartPrice.text = dataCoin.DISPLAY.USD.PRICE
+        binding.moduleChart.txtChartChange1.text = " " + dataCoin.DISPLAY.USD.CHANGE24HOUR
 
-        if (dataCoin.coinInfo.fullName == "BUSD") {
+        if (dataCoin.CoinInfo.FullName == "BUSD") {
             binding.moduleChart.txtChartChange2.text = "0%"
         } else {
             binding.moduleChart.txtChartChange2.text =
-                dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
+                dataCoin.RAW.USD.CHANGEPCT24HOUR.toString().substring(0, 5) + "%"
             //dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
         }
 
-        val taghir = dataCoin.rAW.uSD.cHANGEPCT24HOUR
+        val taghir = dataCoin.RAW.USD.CHANGEPCT24HOUR
         if (taghir > 0) {
 
             binding.moduleChart.txtChartChange2.setTextColor(
@@ -220,7 +220,7 @@ class CoinActivity : AppCompatActivity() {
 
             // show price kamel
             if (it == null) {
-                binding.moduleChart.txtChartPrice.text = dataCoin.dISPLAY.uSD.pRICE
+                binding.moduleChart.txtChartPrice.text = dataCoin.DISPLAY.USD.PRICE
             } else {
                 // show price this dot
                 binding.moduleChart.txtChartPrice.text =
@@ -231,7 +231,7 @@ class CoinActivity : AppCompatActivity() {
     }
 
     private fun requestAndShowChart(period: String) {
-        apiManager.getChartData(dataCoin.coinInfo.name, period, object :
+        apiManager.getChartData(dataCoin.CoinInfo.Name, period, object :
             ApiManager.ApiCallback<Pair<List<ChartData.Data>, ChartData.Data?>> {
             override fun onSuccess(data: Pair<List<ChartData.Data>, ChartData.Data?>) {
                     val chartAdapter = ChartAdapter(data.first, data.second?.open.toString())

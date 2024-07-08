@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 
 data class RAW(
 
-    @SerializedName("USD") var USD: USD? = USD()
+    @SerializedName("USD") var USD: USD
 
 ): Parcelable

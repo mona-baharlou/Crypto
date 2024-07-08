@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class CoinInfo(
 
     @SerializedName("Id") var Id: String? = null,
-    @SerializedName("Name") var Name: String? = null,
+    @SerializedName("Name") var Name: String,
     @SerializedName("FullName") var FullName: String? = null,
     @SerializedName("Internal") var Internal: String? = null,
     @SerializedName("ImageUrl") var ImageUrl: String? = null,

@@ -7,14 +7,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.baharlou.crypto.model.ApiManager
 import com.baharlou.crypto.model.data.CoinAboutData
 import com.baharlou.crypto.model.data.CoinAboutItem
 import com.baharlou.crypto.databinding.ActivityMarketBinding
 import com.baharlou.crypto.model.data.coin.Data
 import com.baharlou.crypto.ui.coin.CoinActivity
-import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,11 +27,7 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     private lateinit var binding: ActivityMarketBinding
 
-    @Inject
-    private lateinit var viewModel: MarketViewModel
-
-    @Inject
-    lateinit var glide: RequestManager
+    private val viewModel: MarketViewModel by viewModels()
 
     lateinit var newsData: ArrayList<Pair<String, String>>
     lateinit var aboutDataMap: MutableMap<String, CoinAboutItem>

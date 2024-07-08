@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Data(
 
-    @SerializedName("CoinInfo") var CoinInfo: CoinInfo? = CoinInfo(),
-    @SerializedName("RAW") var RAW: RAW? = RAW(),
-    @SerializedName("DISPLAY") var DISPLAY: DISPLAY? = DISPLAY()
+    @SerializedName("CoinInfo") var CoinInfo: CoinInfo ,
+    @SerializedName("RAW") var RAW: RAW ,
+    @SerializedName("DISPLAY") var DISPLAY: DISPLAY
 
 ) : Parcelable

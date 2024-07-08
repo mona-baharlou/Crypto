@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 class ApiManager {
 
-    private val apiService: ApiService
+    private val apiServicee: ApiService
 
     init {
 
@@ -40,7 +40,7 @@ class ApiManager {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        apiService = retrofit.create(ApiService::class.java)
+        apiServicee = retrofit.create(ApiService::class.java)
 
     }
 
@@ -79,6 +79,15 @@ class ApiManager {
 
         })
     }*/
+
+
+
+
+
+
+
+
+
 
     fun getChartData(
         symbol: String,
@@ -132,7 +141,7 @@ class ApiManager {
 
         }
 
-        apiService.getChartData(histoPeriod, symbol, limit, aggregate)
+        apiServicee.getChartData(histoPeriod, symbol, limit, aggregate)
             .enqueue(object : Callback<ChartData> {
                 override fun onResponse(call: Call<ChartData>, response: Response<ChartData>) {
                     try {

@@ -7,6 +7,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class DISPLAY (
 
-  @SerializedName("USD" ) var USD : USD? = USD()
+  @SerializedName("USD" ) var USD : USD
 
 ):Parcelable

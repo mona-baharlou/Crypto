@@ -8,15 +8,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.baharlou.crypto.R
-import com.baharlou.crypto.model.BASE_URL_IMAGE
 import com.baharlou.crypto.databinding.ItemRecyclerMarketBinding
+import com.baharlou.crypto.model.BASE_URL_IMAGE
 import com.baharlou.crypto.model.data.coin.Data
-import com.baharlou.crypto.util.ImageHelper
 import com.bumptech.glide.Glide
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewComponent
-import dagger.hilt.components.SingletonComponent
+
 
 class MarketAdapter(
     private var data: ArrayList<Data>,
@@ -24,11 +20,23 @@ class MarketAdapter(
 ) :
     RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
     lateinit var binding: ItemRecyclerMarketBinding
+    //@Inject lateinit var imageHelper: ImageHelper
 
     inner class MarketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        //private val imageHelper: ImageHelper
+       /* init {
+            resolveDependency(itemView)
+        }
+*/
+
+       /* private fun resolveDependency(view: View) {
+            val hiltEntryPoint = fromView(
+                view,
+                MarketViewHolder::class.java
+            )
+            imageHelper = hiltEntryPoint.imageHelper
+        }*/
 
         @SuppressLint("SetTextI18n")
         fun bindViews(dataCoin: Data) {
@@ -65,6 +73,16 @@ class MarketAdapter(
                 binding.txtMarketcap.text =
                     "$" + marketCap.toString().substring(0, indexDot + 3) + " B"
 
+               /* try {
+                    imageHelper?.glide!!
+                        //.with(itemView)
+                        .load(BASE_URL_IMAGE + dataCoin.CoinInfo?.ImageUrl)
+                        .into(binding.imgItem)
+
+                } catch (ex: Exception) {
+
+                }
+*/
                 try {
                     Glide
                         .with(itemView)
@@ -73,7 +91,6 @@ class MarketAdapter(
                 } catch (ex: Exception) {
                     Log.e("glideErr123 ", "bindViews: glide error:${ex.message}")
                 }
-
                 itemView.setOnClickListener {
                     recyclerCallback.onCoinItemClicked(dataCoin)
                 }
@@ -82,6 +99,7 @@ class MarketAdapter(
         }
 
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -100,10 +118,16 @@ class MarketAdapter(
         fun onCoinItemClicked(dataCoin: Data)
     }
 
+
+/*
     @EntryPoint
-    @InstallIn(SingletonComponent::class)
+    @InstallIn(ViewComponent::class)
     interface MarketViewHolderEntryPoint {
-        var imageHelper: ImageHelper
+        fun imageHelper(): ImageHelper
     }
+*/
+
 
 }
+
+

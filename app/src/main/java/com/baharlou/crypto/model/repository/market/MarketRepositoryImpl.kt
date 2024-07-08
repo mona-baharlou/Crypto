@@ -1,14 +1,12 @@
 package com.baharlou.crypto.model.repository.market
 
 import com.baharlou.crypto.model.SUCCESS
-import com.baharlou.crypto.model.data.CoinsData
-import com.baharlou.crypto.model.data.coin.CoinResponse
 import com.baharlou.crypto.model.data.coin.Data
 import com.baharlou.crypto.model.net.ApiService
 import javax.inject.Inject
 
-class MarketRepositoryImpl(
-    @Inject private val apiService: ApiService,
+class MarketRepositoryImpl @Inject constructor(
+    val apiService: ApiService
 ) : MarketRepository {
     override suspend fun getNews(): ArrayList<Pair<String, String>> {
         val dataToSend: ArrayList<Pair<String, String>> = arrayListOf()
@@ -30,6 +28,6 @@ class MarketRepositoryImpl(
         if (coinResponse.Message == SUCCESS) {
             return coinResponse.Data
         }
-        return arrayListOf(Data())
+        return arrayListOf()
     }
 }

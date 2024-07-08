@@ -1,7 +1,6 @@
 package com.baharlou.crypto.model.net
 
 import com.baharlou.crypto.model.data.ChartData
-import com.baharlou.crypto.model.data.CoinsData
 import com.baharlou.crypto.model.data.coin.CoinResponse
 import com.baharlou.crypto.model.data.news.NewsResponse
 import retrofit2.Call

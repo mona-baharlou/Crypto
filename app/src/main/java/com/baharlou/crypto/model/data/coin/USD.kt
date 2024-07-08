@@ -34,7 +34,7 @@ data class USD(
     @SerializedName("HIGH24HOUR") var HIGH24HOUR: String? = null,
     @SerializedName("LOW24HOUR") var LOW24HOUR: String? = null,
     @SerializedName("CHANGE24HOUR") var CHANGE24HOUR: String? = null,
-    @SerializedName("CHANGEPCT24HOUR") var CHANGEPCT24HOUR: String? = null,
+    @SerializedName("CHANGEPCT24HOUR") var CHANGEPCT24HOUR: Int,
     @SerializedName("CHANGEDAY") var CHANGEDAY: String? = null,
     @SerializedName("CHANGEPCTDAY") var CHANGEPCTDAY: String? = null,
     @SerializedName("CHANGEHOUR") var CHANGEHOUR: String? = null,

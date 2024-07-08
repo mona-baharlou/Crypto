@@ -4,12 +4,16 @@ import android.content.Context
 import com.baharlou.crypto.model.API_KEY
 import com.baharlou.crypto.model.BASE_URL
 import com.baharlou.crypto.model.net.ApiService
+import com.baharlou.crypto.model.repository.coin.CoinRepository
+import com.baharlou.crypto.model.repository.market.MarketRepository
+import com.baharlou.crypto.model.repository.market.MarketRepositoryImpl
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
@@ -59,5 +63,20 @@ object Modules {
         return retrofit.create(ApiService::class.java)
     }
 
+    @Provides
+    @Singleton // this is new
+    fun providesRepo(apiService: ApiService): MarketRepositoryImpl { // this is just fake repository
+        return MarketRepositoryImpl(apiService)
+    }
 
+
+    @Provides
+     fun providesMarketRepository(): MarketRepository {
+        return Retrofit.Builder().build().create(MarketRepository::class.java)
+    }
+
+    @Provides
+     fun providesCoinRepository(): CoinRepository {
+        return Retrofit.Builder().build().create(CoinRepository::class.java)
+    }
 }
