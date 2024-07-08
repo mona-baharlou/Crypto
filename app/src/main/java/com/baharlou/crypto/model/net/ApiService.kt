@@ -11,10 +11,10 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("v2/news/")
-    fun getTopNews(@Query("sortOrder") sortOrder: String = "popular"): NewsResponse//Call<NewsData>
+    suspend fun getTopNews(@Query("sortOrder") sortOrder: String = "popular"): NewsResponse//Call<NewsData>
 
     @GET("top/totalvolfull")
-    fun getTopCoins(
+    suspend fun getTopCoins(
         @Query("tsym") toSymbol: String = "USD",
         @Query("limit") limitData: Int = 10
     ): CoinResponse

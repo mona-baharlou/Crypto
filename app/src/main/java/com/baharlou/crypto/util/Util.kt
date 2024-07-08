@@ -1,4 +1,4 @@
-package com.baharlou.crypto.ui
+package com.baharlou.crypto.util
 
 import android.util.Log
 import kotlinx.coroutines.CoroutineExceptionHandler

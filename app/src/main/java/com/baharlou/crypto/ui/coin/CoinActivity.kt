@@ -166,7 +166,7 @@ class CoinActivity : AppCompatActivity() {
             //dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
         }
 
-        val taghir = dataCoin.RAW.USD.CHANGEPCT24HOUR
+        val taghir = dataCoin.RAW.USD.CHANGEPCT24HOUR.toLong()
         if (taghir > 0) {
 
             binding.moduleChart.txtChartChange2.setTextColor(

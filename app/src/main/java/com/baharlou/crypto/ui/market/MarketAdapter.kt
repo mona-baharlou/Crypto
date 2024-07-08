@@ -20,33 +20,33 @@ class MarketAdapter(
 ) :
     RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
     lateinit var binding: ItemRecyclerMarketBinding
-    //@Inject lateinit var imageHelper: ImageHelper
 
     inner class MarketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-       /* init {
-            resolveDependency(itemView)
-        }
-*/
+        /* init {
+             resolveDependency(itemView)
+         }
+ */
 
-       /* private fun resolveDependency(view: View) {
-            val hiltEntryPoint = fromView(
-                view,
-                MarketViewHolder::class.java
-            )
-            imageHelper = hiltEntryPoint.imageHelper
-        }*/
+        /* private fun resolveDependency(view: View) {
+             val hiltEntryPoint = fromView(
+                 view,
+                 MarketViewHolder::class.java
+             )
+             imageHelper = hiltEntryPoint.imageHelper
+         }*/
 
         @SuppressLint("SetTextI18n")
         fun bindViews(dataCoin: Data) {
 
             if (dataCoin.DISPLAY != null && dataCoin.RAW != null) {
                 binding.txtCoinName.text = dataCoin.CoinInfo!!.FullName
-                binding.txtPrice.text = dataCoin.RAW!!.USD!!.PRICE
+                binding.txtPrice.text = dataCoin.DISPLAY!!.USD!!.PRICE
 
-                val change = dataCoin.RAW!!.USD!!.CHANGE24HOUR
-                if (change!!.toInt() > 0) {
+                //val change = dataCoin.RAW!!.USD!!.CHANGE24HOUR?.toLong() ?: 0
+                val change = dataCoin.RAW!!.USD!!.CHANGE24HOUR ?: ""
+                if (!change!!.startsWith("-")) {
                     binding.txtMarketName.setTextColor(
                         ContextCompat.getColor(
                             binding.root.context,
@@ -55,7 +55,7 @@ class MarketAdapter(
                     )
                     binding.txtMarketName.text =
                         dataCoin.RAW?.USD?.CHANGEPCT24HOUR.toString().substring(0, 4) + "%"
-                } else if (change.toInt() < 0) {
+                } else if (change.startsWith("-")) {
                     binding.txtMarketName.setTextColor(
                         ContextCompat.getColor(
                             binding.root.context,
@@ -63,26 +63,24 @@ class MarketAdapter(
                         )
                     )
                     binding.txtMarketName.text =
-                        dataCoin.RAW?.USD?.CHANGEPCT24HOUR.toString().substring(0, 5) + "%"
+                        dataCoin.DISPLAY?.USD?.CHANGEPCT24HOUR.toString().substring(0, 5) + "%"
                 } else {
                     binding.txtMarketName.text = "0%"
                 }
 
-                val marketCap = dataCoin.RAW?.USD?.MARKET!!.toInt() / 1000000000
-                val indexDot = marketCap.toString().indexOf('.')
-                binding.txtMarketcap.text =
-                    "$" + marketCap.toString().substring(0, indexDot + 3) + " B"
+                val marketCap = dataCoin.DISPLAY?.USD?.MKTCAP!! //.toInt() / 1000000000
+                binding.txtMarketcap.text = marketCap
 
-               /* try {
-                    imageHelper?.glide!!
-                        //.with(itemView)
-                        .load(BASE_URL_IMAGE + dataCoin.CoinInfo?.ImageUrl)
-                        .into(binding.imgItem)
+                /* try {
+                     imageHelper?.glide!!
+                         //.with(itemView)
+                         .load(BASE_URL_IMAGE + dataCoin.CoinInfo?.ImageUrl)
+                         .into(binding.imgItem)
 
-                } catch (ex: Exception) {
+                 } catch (ex: Exception) {
 
-                }
-*/
+                 }
+ */
                 try {
                     Glide
                         .with(itemView)
@@ -119,13 +117,13 @@ class MarketAdapter(
     }
 
 
-/*
-    @EntryPoint
-    @InstallIn(ViewComponent::class)
-    interface MarketViewHolderEntryPoint {
-        fun imageHelper(): ImageHelper
-    }
-*/
+    /*
+        @EntryPoint
+        @InstallIn(ViewComponent::class)
+        interface MarketViewHolderEntryPoint {
+            fun imageHelper(): ImageHelper
+        }
+    */
 
 
 }

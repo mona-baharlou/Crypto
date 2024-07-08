@@ -14,16 +14,17 @@ data class CoinInfo(
     @SerializedName("Internal") var Internal: String? = null,
     @SerializedName("ImageUrl") var ImageUrl: String? = null,
     @SerializedName("Url") var Url: String? = null,
-    @SerializedName("Algorithm") var Algorithm: String? = null,
-    @SerializedName("ProofType") var ProofType: String? = null,
+    /*@SerializedName("Algorithm") var Algorithm: String? = null,
+    @SerializedName("ProofType") var ProofType: String? = null,*/
     @SerializedName("Rating") var Rating: Rating? = Rating(),
-    @SerializedName("NetHashesPerSecond") var NetHashesPerSecond: Int? = null,
-    @SerializedName("BlockNumber") var BlockNumber: Int? = null,
-    @SerializedName("BlockTime") var BlockTime: Int? = null,
-    @SerializedName("BlockReward") var BlockReward: Double? = null,
-    @SerializedName("AssetLaunchDate") var AssetLaunchDate: String? = null,
+    /* @SerializedName("NetHashesPerSecond") var NetHashesPerSecond: Int? = null,
+     @SerializedName("BlockNumber") var BlockNumber: Int? = null,
+     @SerializedName("BlockTime") var BlockTime: Int? = null,
+     @SerializedName("BlockReward") var BlockReward: Double? = null,
+     @SerializedName("AssetLaunchDate") var AssetLaunchDate: String? = null,
+    */
     @SerializedName("MaxSupply") var MaxSupply: Double? = null,
-    @SerializedName("Type") var Type: Int? = null,
-    @SerializedName("DocumentType") var DocumentType: String? = null
+    /*  @SerializedName("Type") var Type: Int? = null,
+      @SerializedName("DocumentType") var DocumentType: String? = null*/
 
-):Parcelable
+) : Parcelable

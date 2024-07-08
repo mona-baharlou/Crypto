@@ -16,7 +16,6 @@ import com.baharlou.crypto.model.data.coin.Data
 import com.baharlou.crypto.ui.coin.CoinActivity
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 const val COIN_DATA = "coin_data"
 const val ABOUT_DATA = "about_data"
@@ -42,7 +41,6 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         loadMore()
         getAbout()
 
-
         binding.swipeRefreshMain.setOnRefreshListener {
             initUI()
             Handler(Looper.getMainLooper()).postDelayed({
@@ -54,6 +52,17 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     override fun onResume() {
         super.onResume()
         initUI()
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.newsList.observe(this){
+            setNews()
+        }
+
+        viewModel.coinList.observe(this){
+            setCoins()
+        }
     }
 
     private fun loadMore() {
@@ -64,12 +73,8 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     }
 
     private fun initUI() {
-
         viewModel.getNews()
         viewModel.getCoins()
-
-        getNews()
-        getCoins()
     }
 
     private fun getAbout() {
@@ -98,29 +103,14 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     }
 
-    private fun getCoins() {
+    private fun setCoins() {
         if (viewModel.coinList.value!!.isNotEmpty()) {
             showData(cleanDataFromServer(viewModel.coinList.value!!))
         }
-
-        /*  apiManager.getCoinList(object : ApiManager.ApiCallback<List<CoinsData.Data>> {
-              override fun onSuccess(data: List<CoinsData.Data>) {
-                  showData(cleanDataFromServer(data))
-
-              }
-
-              override fun onError(errorMessage: String) {
-                  Toast.makeText(this@MarketActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
-                      .show()
-              }
-
-          })
-*/
     }
 
     private fun cleanDataFromServer(data: List<Data>): List<Data> {
         val newData = mutableListOf<Data>()
-        // val newData = data.toMutableList()
         data.forEach {
             if (it.RAW != null || it.DISPLAY != null) {
                 newData.add(it)
@@ -131,15 +121,12 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     }
 
     private fun showData(data: List<Data>) {
-
         val marketAdapter = MarketAdapter(ArrayList(data), this)
         binding.moduleWatchlist.recyclerMain.adapter = marketAdapter
         binding.moduleWatchlist.recyclerMain.layoutManager = LinearLayoutManager(this)
-
-
     }
 
-    private fun getNews() {
+    private fun setNews() {
         try {
             if (viewModel.newsList.value!!.isNotEmpty()) {
                 newsData = viewModel.newsList.value!!
@@ -169,8 +156,6 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
     override fun onCoinItemClicked(dataCoin: Data) {
         val intent = Intent(this, CoinActivity::class.java)
-
-        //val pair = Pair(dataCoin, aboutDataMap[dataCoin.coinInfo.name]!!)
 
         val bundle = Bundle()
         bundle.putParcelable(COIN_DATA, dataCoin)

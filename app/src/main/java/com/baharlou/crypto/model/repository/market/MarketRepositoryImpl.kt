@@ -1,5 +1,6 @@
 package com.baharlou.crypto.model.repository.market
 
+import android.util.Log
 import com.baharlou.crypto.model.SUCCESS
 import com.baharlou.crypto.model.data.coin.Data
 import com.baharlou.crypto.model.net.ApiService
@@ -10,15 +11,20 @@ class MarketRepositoryImpl @Inject constructor(
 ) : MarketRepository {
     override suspend fun getNews(): ArrayList<Pair<String, String>> {
         val dataToSend: ArrayList<Pair<String, String>> = arrayListOf()
+        try {
+            val newsResponse = apiService.getTopNews()
 
-        val newsResponse = apiService.getTopNews()
-        if (newsResponse.Type == 100) {
+            Log.d("newwwws ", "getNews: $newsResponse")
 
-            newsResponse.Data.forEach {
-                dataToSend.add(Pair(it.title ?: "", it.url ?: ""))
+            if (newsResponse.Type == 100) {
+
+                newsResponse.Data.forEach {
+                    dataToSend.add(Pair(it.title ?: "", it.url ?: ""))
+                }
             }
+        } catch (ex: Exception) {
+            Log.d("newsException ", "getNews: ${ex.message}")
         }
-
         return dataToSend
     }
 

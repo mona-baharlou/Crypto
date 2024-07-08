@@ -25,7 +25,7 @@
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="Some random news, Some random news, Some random news, "
+        android:text=""
         android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toBottomOf="@+id/img_news"
         app:layout_constraintEnd_toEndOf="parent"

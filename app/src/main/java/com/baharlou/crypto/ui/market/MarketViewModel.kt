@@ -1,14 +1,11 @@
 package com.baharlou.crypto.ui.market
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baharlou.crypto.model.data.coin.Data
-import com.baharlou.crypto.model.repository.market.MarketRepository
 import com.baharlou.crypto.model.repository.market.MarketRepositoryImpl
-import com.baharlou.crypto.ui.coroutineExceptionHandler
+import com.baharlou.crypto.util.coroutineExceptionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +27,9 @@ class MarketViewModel @Inject constructor(
 
     fun getNews() {
         viewModelScope.launch(coroutineExceptionHandler) {
-            newsList.postValue(marketRepository.getNews())
+
+            val news = marketRepository.getNews()
+            newsList.postValue(news)
         }
 
     }
