@@ -78,7 +78,9 @@ class CoinActivity : AppCompatActivity() {
         binding.moduleAbout.tvAboutCoin.text = dataAboutCoin.coinDesc
         binding.moduleAbout.tvGithub.text = dataAboutCoin.coinGithub
         binding.moduleAbout.tvReddit.text = dataAboutCoin.coinReddit
-        binding.moduleAbout.tvTwitter.text = "@${dataAboutCoin.coinTwitter}"
+        binding.moduleAbout.tvTwitter.text =
+            if (dataAboutCoin.coinTwitter != "no-data") "@${dataAboutCoin.coinTwitter}"
+            else dataAboutCoin.coinTwitter
 
         binding.moduleAbout.tvWebsite.setOnClickListener {
             openAboutWebsite(dataAboutCoin.coinWebsite.toString())
