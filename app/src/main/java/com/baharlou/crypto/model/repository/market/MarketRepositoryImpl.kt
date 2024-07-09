@@ -14,8 +14,6 @@ class MarketRepositoryImpl @Inject constructor(
         try {
             val newsResponse = apiService.getTopNews()
 
-            Log.d("newwwws ", "getNews: $newsResponse")
-
             if (newsResponse.Type == 100) {
 
                 newsResponse.Data.forEach {

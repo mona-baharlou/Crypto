@@ -88,6 +88,7 @@ class ApiManager {
 
 
 
+/*
 
     fun getChartData(
         symbol: String,
@@ -163,6 +164,7 @@ class ApiManager {
             })
 
     }
+*/
 
 
     interface ApiCallback<T> {
