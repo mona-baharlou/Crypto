@@ -54,7 +54,10 @@ class MarketAdapter(
                         )
                     )
                     binding.txtMarketName.text =
-                        dataCoin.RAW?.USD?.CHANGEPCT24HOUR.toString().substring(0, 4) + "%"
+                        //dataCoin.RAW?.USD?.CHANGE24HOUR.toString().substring(0, 4) + "%"
+                        if ((dataCoin.DISPLAY?.USD?.CHANGE24HOUR ?: "0").length > 5)
+                            dataCoin.DISPLAY?.USD?.CHANGE24HOUR?.substring(0, 5) + "%"
+                        else dataCoin.DISPLAY?.USD?.CHANGE24HOUR + "%"
                 } else if (change.startsWith("-")) {
                     binding.txtMarketName.setTextColor(
                         ContextCompat.getColor(
@@ -63,7 +66,9 @@ class MarketAdapter(
                         )
                     )
                     binding.txtMarketName.text =
-                        dataCoin.DISPLAY?.USD?.CHANGEPCT24HOUR.toString().substring(0, 5) + "%"
+                        if ((dataCoin.DISPLAY?.USD?.CHANGE24HOUR ?: "0").length > 5)
+                            dataCoin.DISPLAY?.USD?.CHANGE24HOUR?.substring(0, 5) + "%"
+                        else dataCoin.DISPLAY?.USD?.CHANGE24HOUR + "%"
                 } else {
                     binding.txtMarketName.text = "0%"
                 }

@@ -1,3 +1,4 @@
+/*
 package com.baharlou.crypto.model
 
 import android.util.Log
@@ -43,7 +44,7 @@ class ApiManager {
 
     }
 
-    /*fun getNews(apiCallback: ApiCallback<ArrayList<Pair<String, String>>>) {
+    fun getNews(apiCallback: ApiCallback<ArrayList<Pair<String, String>>>) {
         apiService.getTopNews().enqueue(object : Callback<NewsData> {
             override fun onResponse(call: Call<NewsData>, response: Response<NewsData>) {
                 val data = response.body()!!
@@ -63,7 +64,7 @@ class ApiManager {
         })
     }
 
-*/    /*fun getCoinList(apiCallback: ApiCallback<List<CoinsData.Data>>) {
+    fun getCoinList(apiCallback: ApiCallback<List<CoinsData.Data>>) {
         apiService.getTopCoins().enqueue(object : Callback<CoinsData> {
             override fun onResponse(call: Call<CoinsData>, response: Response<CoinsData>) {
 
@@ -77,7 +78,7 @@ class ApiManager {
             }
 
         })
-    }*/
+    }
 
 
 
@@ -87,7 +88,6 @@ class ApiManager {
 
 
 
-/*
 
     fun getChartData(
         symbol: String,
@@ -163,7 +163,6 @@ class ApiManager {
             })
 
     }
-*/
 
 
     interface ApiCallback<T> {
@@ -172,4 +171,4 @@ class ApiManager {
 
         fun onError(errorMessage: String)
     }
-}
+}*/

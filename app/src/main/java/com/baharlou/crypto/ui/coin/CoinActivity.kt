@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -22,8 +23,9 @@ import com.baharlou.crypto.model.WEEK
 import com.baharlou.crypto.model.YEAR
 import com.baharlou.crypto.model.data.CoinAboutItem
 import com.baharlou.crypto.model.data.coin.Data
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding
@@ -37,6 +39,9 @@ class CoinActivity : AppCompatActivity() {
 
         binding = ActivityCoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        observeData()
+
         try {
             val fromBundle = intent.getBundleExtra(BUNDLE_DATA)!!
 
@@ -48,9 +53,7 @@ class CoinActivity : AppCompatActivity() {
                 dataAboutCoin = CoinAboutItem()
             }
         } catch (ex: Exception) {
-            // Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
-
-
+             Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
             binding.toolbar.toolbar.title = dataCoin.CoinInfo?.Name
         }
         initUI()
@@ -64,7 +67,6 @@ class CoinActivity : AppCompatActivity() {
 
     private fun initUI() {
         initChart()
-
 
         initStatistics()
 

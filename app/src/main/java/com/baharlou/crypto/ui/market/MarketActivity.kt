@@ -57,11 +57,11 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
     }
 
     private fun observeData() {
-        viewModel.newsList.observe(this){
+        viewModel.newsList.observe(this) {
             setNews()
         }
 
-        viewModel.coinList.observe(this){
+        viewModel.coinList.observe(this) {
             setCoins()
         }
     }
@@ -159,10 +159,21 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
         val intent = Intent(this, CoinActivity::class.java)
 
         val bundle = Bundle()
-        bundle.putParcelable(COIN_DATA, dataCoin)
-        Log.d("coiiin ", "onCoinItemClicked: ${dataCoin}")
-        bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.CoinInfo!!.Name]!!)
-        intent.putExtra(BUNDLE_DATA, bundle)
-        startActivity(intent)
+        try {
+            bundle.putParcelable(COIN_DATA, dataCoin)
+
+            try {
+                bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.CoinInfo!!.Name]!!)
+            } catch (ex: Exception) {
+
+                aboutDataMap[dataCoin.CoinInfo!!.Name] = CoinAboutItem()
+                bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.CoinInfo!!.Name]!!)
+            }
+
+            intent.putExtra(BUNDLE_DATA, bundle)
+            startActivity(intent)
+        } catch (ex: Exception) {
+            Log.d("ItemClickedEx ", "onCoinItemClicked: ${ex.localizedMessage}")
+        }
     }
 }
