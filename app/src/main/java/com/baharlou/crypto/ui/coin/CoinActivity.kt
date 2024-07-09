@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -53,7 +52,6 @@ class CoinActivity : AppCompatActivity() {
                 dataAboutCoin = CoinAboutItem()
             }
         } catch (ex: Exception) {
-             Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
             binding.toolbar.toolbar.title = dataCoin.CoinInfo?.Name
         }
         initUI()
@@ -241,8 +239,6 @@ class CoinActivity : AppCompatActivity() {
     }
 
     private fun setChartData() {
-
-
         if (viewModel.chartData.value != null) {
             val chartAdapter = ChartAdapter(
                 viewModel.chartData.value?.first!!,
