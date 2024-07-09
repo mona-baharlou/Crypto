@@ -66,12 +66,15 @@ object Modules {
 
 
     @Provides
+    @Singleton
      fun providesMarketRepository(): MarketRepository {
         return Retrofit.Builder().build().create(MarketRepository::class.java)
     }
 
     @Provides
+    @Singleton
      fun providesCoinRepository(): CoinRepository {
         return Retrofit.Builder().build().create(CoinRepository::class.java)
     }
+    
 }

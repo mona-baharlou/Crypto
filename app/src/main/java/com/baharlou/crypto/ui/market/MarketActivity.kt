@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -159,6 +160,7 @@ class MarketActivity : AppCompatActivity(), MarketAdapter.RecyclerCallback {
 
         val bundle = Bundle()
         bundle.putParcelable(COIN_DATA, dataCoin)
+        Log.d("coiiin ", "onCoinItemClicked: ${dataCoin}")
         bundle.putParcelable(ABOUT_DATA, aboutDataMap[dataCoin.CoinInfo!!.Name]!!)
         intent.putExtra(BUNDLE_DATA, bundle)
         startActivity(intent)

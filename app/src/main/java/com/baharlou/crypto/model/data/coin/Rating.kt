@@ -5,9 +5,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-
 data class Rating (
 
-  @SerializedName("Weiss" ) var Weiss : Weiss? = Weiss()
+  @SerializedName("Weiss" ) var Weiss : Weiss? = null
 
 ): Parcelable

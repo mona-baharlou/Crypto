@@ -12,7 +12,7 @@ data class CoinResponse(
     /*@SerializedName("MetaData") var MetaData: MetaData? = MetaData(),
     @SerializedName("SponsoredData") var SponsoredData: ArrayList<String> = arrayListOf(),*/
     @SerializedName("Data") var Data: ArrayList<Data> = arrayListOf(),
-    @SerializedName("RateLimit") var RateLimit: RateLimit? = RateLimit(),
+    //@SerializedName("RateLimit") var RateLimit: RateLimit? = RateLimit(),
     @SerializedName("HasWarning") var HasWarning: Boolean? = null
 
 ):Parcelable

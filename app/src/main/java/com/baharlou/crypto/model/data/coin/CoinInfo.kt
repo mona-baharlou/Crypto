@@ -16,7 +16,7 @@ data class CoinInfo(
     @SerializedName("Url") var Url: String? = null,
     /*@SerializedName("Algorithm") var Algorithm: String? = null,
     @SerializedName("ProofType") var ProofType: String? = null,*/
-    @SerializedName("Rating") var Rating: Rating? = Rating(),
+    //@SerializedName("Rating") var Rating: Rating? = Rating(),
     /* @SerializedName("NetHashesPerSecond") var NetHashesPerSecond: Int? = null,
      @SerializedName("BlockNumber") var BlockNumber: Int? = null,
      @SerializedName("BlockTime") var BlockTime: Int? = null,
