@@ -1,7 +1,6 @@
 package com.baharlou.crypto.model
 
 import android.util.Log
-import com.baharlou.crypto.model.data.ChartData
 import com.baharlou.crypto.model.net.ApiService
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient

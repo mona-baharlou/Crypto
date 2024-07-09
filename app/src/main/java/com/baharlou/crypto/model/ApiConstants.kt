@@ -23,3 +23,5 @@ const val ALL = "All"
 
 
 const val SUCCESS = "Success"
+
+const val TWITTER_BASE_URL = "https://twitter.com/"

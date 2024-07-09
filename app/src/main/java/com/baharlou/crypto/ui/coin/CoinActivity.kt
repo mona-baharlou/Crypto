@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.baharlou.crypto.R
@@ -13,27 +13,24 @@ import com.baharlou.crypto.ui.market.ABOUT_DATA
 import com.baharlou.crypto.ui.market.BUNDLE_DATA
 import com.baharlou.crypto.ui.market.COIN_DATA
 import com.baharlou.crypto.model.ALL
-import com.baharlou.crypto.model.ApiManager
 import com.baharlou.crypto.model.HOUR
 import com.baharlou.crypto.model.HOURS24
 import com.baharlou.crypto.model.MONTH
 import com.baharlou.crypto.model.MONTH3
+import com.baharlou.crypto.model.TWITTER_BASE_URL
 import com.baharlou.crypto.model.WEEK
 import com.baharlou.crypto.model.YEAR
-import com.baharlou.crypto.model.data.ChartData
 import com.baharlou.crypto.model.data.CoinAboutItem
 import com.baharlou.crypto.model.data.coin.Data
-import javax.inject.Inject
 
-private const val TWITTER_BASE_URL = "https://twitter.com/"
 
 class CoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinBinding
-    @Inject lateinit var viewModel: CoinViewModel
+    private val viewModel: CoinViewModel by viewModels()
+
     private lateinit var dataCoin: Data
     private lateinit var dataAboutCoin: CoinAboutItem
-    private var apiManager = ApiManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +48,7 @@ class CoinActivity : AppCompatActivity() {
                 dataAboutCoin = CoinAboutItem()
             }
         } catch (ex: Exception) {
-           // Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this, "excep: ${ex.message}", Toast.LENGTH_SHORT).show()
 
 
             binding.toolbar.toolbar.title = dataCoin.CoinInfo?.Name
@@ -59,13 +56,19 @@ class CoinActivity : AppCompatActivity() {
         initUI()
     }
 
+    private fun observeData() {
+        viewModel.chartData.observe(this) {
+            setChartData()
+        }
+    }
+
     private fun initUI() {
-            initChart()
+        initChart()
 
 
-            initStatistics()
+        initStatistics()
 
-            initAbout()
+        initAbout()
 
     }
 
@@ -166,7 +169,7 @@ class CoinActivity : AppCompatActivity() {
             //dataCoin.rAW.uSD.cHANGEPCT24HOUR.toString().substring(0, 5) + "%"
         }
 
-        val change = dataCoin.DISPLAY.USD.CHANGEPCT24HOUR ?:""
+        val change = dataCoin.DISPLAY.USD.CHANGEPCT24HOUR ?: ""
         if (!change.startsWith("-")) {
 
             binding.moduleChart.txtChartChange2.setTextColor(
@@ -224,26 +227,26 @@ class CoinActivity : AppCompatActivity() {
             } else {
                 // show price this dot
                 binding.moduleChart.txtChartPrice.text =
-                    "$ " + (it as ChartData.Data).close.toString()
+                    "$ " + (it as com.baharlou.crypto.model.data.chart.Data).close?.toString()
             }
 
         }
     }
 
     private fun requestAndShowChart(period: String) {
-        apiManager.getChartData(dataCoin.CoinInfo.Name, period, object :
-            ApiManager.ApiCallback<Pair<List<ChartData.Data>, ChartData.Data?>> {
-            override fun onSuccess(data: Pair<List<ChartData.Data>, ChartData.Data?>) {
-                    val chartAdapter = ChartAdapter(data.first, data.second?.open.toString())
-                    binding.moduleChart.sparkMain.adapter = chartAdapter
-            }
+        viewModel.getChartData(dataCoin.CoinInfo.Name, period)
 
-            override fun onError(errorMessage: String) {
-                Toast.makeText(this@CoinActivity, "Error : $errorMessage", Toast.LENGTH_SHORT)
-                    .show()
-            }
+    }
 
-        })
+    private fun setChartData() {
 
+
+        if (viewModel.chartData.value != null) {
+            val chartAdapter = ChartAdapter(
+                viewModel.chartData.value?.first!!,
+                viewModel.chartData.value?.second?.open.toString()
+            )
+            binding.moduleChart.sparkMain.adapter = chartAdapter
+        }
     }
 }

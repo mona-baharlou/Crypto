@@ -1,23 +1,23 @@
 package com.baharlou.crypto.ui.coin
 
-import com.baharlou.crypto.model.data.ChartData
+import com.baharlou.crypto.model.data.chart.Data
 import com.robinhood.spark.SparkAdapter
 
 class
 ChartAdapter(
-    private val historicalData: List<ChartData.Data>,
+    private val historicalData: List<Data>,
     private val baseline: String?
 ) : SparkAdapter() {
     override fun getCount(): Int {
         return historicalData.size
     }
 
-    override fun getItem(index: Int): ChartData.Data {
+    override fun getItem(index: Int): Data {
         return historicalData[index]
     }
 
     override fun getY(index: Int): Float {
-        return historicalData[index].close.toFloat()
+        return (historicalData[index].close ?: 0).toFloat()
     }
 
     override fun hasBaseLine(): Boolean {
